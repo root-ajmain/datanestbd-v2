@@ -3,6 +3,7 @@ import './globals.css';
 import './premium.css';
 import { ThemeProvider } from '@/components/shell/ThemeProvider';
 import { ScrollProgress } from '@/components/shell/ScrollProgress';
+import { LoadingScreen } from '@/components/shell/LoadingScreen';
 import { siteConfig } from '@/content/site';
 import { getOrganizationJsonLd, getWebsiteJsonLd, jsonLdString } from '@/lib/seo';
 import { fontVariables } from '@/lib/fonts';
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         <ThemeProvider>
+          <LoadingScreen />
           <ScrollProgress />
           {children}
         </ThemeProvider>

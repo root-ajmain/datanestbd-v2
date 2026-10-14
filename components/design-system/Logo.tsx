@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Layers } from 'lucide-react';
+import Image from 'next/image';
 
 interface LogoProps {
   className?: string;
@@ -16,9 +16,16 @@ interface LogoProps {
 export function Logo({ className = '', iconSize = 36, href = '/' }: LogoProps) {
   const content = (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <span className="brand-glyph" style={{ width: iconSize, height: iconSize }} aria-hidden="true">
-        <Layers size={iconSize * 0.54} strokeWidth={1.8} />
-      </span>
+      <Image
+        src="/images/datanest-logo-mark.png"
+        alt=""
+        width={iconSize}
+        height={iconSize}
+        priority
+        className="shrink-0 object-contain"
+        style={{ width: iconSize, height: iconSize }}
+        aria-hidden="true"
+      />
       {/*
         No red text here: at 20px/regular-weight Michroma this would sit at
         4.45:1, under the 4.5:1 AA floor for body-scale text (red only
