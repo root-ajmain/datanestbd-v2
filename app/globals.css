@@ -1,0 +1,710 @@
+@import "tailwindcss";
+@source not "../codex";
+@source not "../.removed_backup";
+@source not "../.next-redesign";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
+
+:root {
+  --font-ui: "Inter", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  /* =====================================================================
+     Dark Teal — Primary Base (repointed to the Bangladesh-industry palette:
+     #0B2224 / #336269 / #93D4D8 / #941D1D — see the DARK-MODE DESIGN SYSTEM
+     block below for the full rationale and the derived accessible tints).
+     ===================================================================== */
+  --navy-900: #0B2224;   /* deepest surface, footer, headings — = --bg exactly */
+  --navy-800: #112A2C;   /* BASE — nav, hero, dark sections, body text on light */
+  --navy-600: #336269;   /* elevated card surface on dark sections — the given slate-teal */
+  --navy-400: #7FA0A4;   /* secondary / muted text (5.9:1 on --navy-900) */
+  --navy-50:  #E8F6F7;   /* tinted section background */
+
+  /* =====================================================================
+     Legacy accent names, repointed to the new brand-red system — every
+     existing page/component across the site references these two palettes
+     (never the new --brand tokens directly), so repointing here is what
+     actually rolls the new design out everywhere at once.
+
+     --orange-500 / --red-700 are the dual-purpose "accent icon or small
+     text" slots used throughout (eyebrows, step numbers, inline icons).
+     The base --brand (#df2531) measures 4.45:1 on black — under the 4.5:1
+     AA floor for body-scale text — so these resolve to --brand-hover
+     (#e8434d) instead, which independently verifies at ~5.3:1 even at
+     11-12px. --orange-600/700 and --red-800 back actual button/background
+     fills, where the saturated base red is correct and the text on top of
+     them is white (fixed separately wherever it wasn't already).
+     ===================================================================== */
+  --orange-600: var(--brand);
+  --orange-700: var(--brand-active);
+  --orange-500: var(--brand-hover);
+  --orange-50:  var(--brand-12);
+
+  --red-700: var(--brand-hover);
+  --red-800: var(--brand-active);
+  --red-50:  var(--brand-12);
+
+  /* The secondary accent (aqua) — trust/verification marks, icons and stat
+     highlights that shouldn't compete with the one red CTA per viewport. */
+  --accent-teal: var(--accent);
+  --accent-teal-hover: var(--accent-hover);
+
+  /* =====================================================================
+     Neutrals
+     ===================================================================== */
+  --white:     #FFFFFF;  /* page background — the dominant surface */
+  --grey-200:  #E1E1E1;  /* Titanium Grey — borders, dividers, disabled */
+  --grey-100:  #F4F4F4;  /* subtle alternating section background */
+
+  /* =====================================================================
+     STEP 2 — Semantic Mappings
+     Resolved directly to the dark/red design system (see block below) —
+     there is no light theme anymore, so :root carries the same values the
+     old `.dark` override used to, to avoid a flash of the old light palette
+     before ThemeProvider's effect ever runs.
+     ===================================================================== */
+  --color-page-bg: var(--bg);
+  --color-section-alt: var(--surface-1);
+  --color-section-tinted: var(--surface-2);
+  --color-section-dark: var(--bg);
+
+  --color-surface: var(--surface-1);
+  --color-surface-subtle: var(--surface-2);
+  --color-surface-tinted: var(--surface-2);
+  --color-surface-dark: var(--bg);
+
+  --color-text-primary: var(--ds-text-primary);
+  --color-text-headings: var(--ds-text-primary);
+  --color-text-secondary: var(--ds-text-secondary);
+  --color-text-dark-section: var(--ds-text-primary);
+
+  --color-link: var(--brand);
+  --color-link-hover: var(--brand-hover);
+  --color-link-dark: var(--brand);
+
+  --color-border: var(--ds-border);
+  --color-border-strong: var(--brand-65);
+  --color-divider: var(--ds-border);
+
+  /* Primary Button: brand-red fill, white label — never black/navy on red (fails AA). */
+  --color-cta-bg: var(--brand);
+  --color-cta-hover: var(--brand-hover);
+  --color-cta-text: var(--ds-text-on-brand);
+
+  /* Secondary Button: transparent, border, white text */
+  --color-btn-sec-bg: transparent;
+  --color-btn-sec-border: var(--ds-border-strong);
+  --color-btn-sec-text: var(--ds-text-primary);
+  --color-btn-sec-hover: var(--surface-2);
+
+  /* Disabled State */
+  --color-disabled-bg: var(--surface-2);
+  --color-disabled-text: var(--ds-text-muted);
+
+  /* Form Input */
+  --color-input-border: var(--ds-border);
+  --color-focus-ring: var(--brand-35);
+
+  /* Badges: light red fill, white text — red text itself stays below AA at badge scale. */
+  --color-badge-bg: var(--brand-12);
+  --color-badge-text: var(--ds-text-primary);
+
+  /* Nav & Footer */
+  --color-nav-bg: var(--bg);
+  --color-nav-text: var(--ds-text-primary);
+  --color-footer-bg: var(--bg);
+  --color-footer-text: var(--ds-text-primary);
+
+  /* Alerts */
+  --color-alert-bg: var(--brand-12);
+  --color-alert-text: var(--ds-text-primary);
+
+  color-scheme: dark;
+
+  /* =====================================================================
+     DARK-MODE DESIGN SYSTEM — primary token definitions
+     Palette: #0B2224 (deep teal-black) / #336269 (slate-teal) / #93D4D8
+     (aqua) / #941D1D (brick red) — chosen for Bangladesh's tech/fintech
+     market: the red and the green-leaning teal echo the national flag
+     without being literal, and read as "serious infrastructure" rather
+     than a consumer-app palette. Red stays the single CTA/signal color;
+     teal and aqua carry everything else (surfaces, trust marks, secondary
+     accents) so the red never has to compete with itself for attention.
+
+     #941D1D measures only ~1.9:1 against #0B2224 — far too low for text or
+     icons, only usable as a filled background with white text on top (see
+     --brand-hover below for the derived tint that actually works as text).
+     The legacy --color-, --orange- and --red- prefixed names above are
+     repointed to these (site-wide rollout). New components should
+     reference these directly rather than going through the legacy names.
+     ===================================================================== */
+  --bg: #0B2224;
+  --surface-1: #112A2C;
+  --surface-2: #16363A;
+  --surface-3: #1D454A;
+  --ds-border: rgba(147, 212, 216, 0.14);
+  --ds-border-strong: rgba(147, 212, 216, 0.32);
+
+  --brand: #941D1D;
+  /* Derived tint, not a new hue: #941D1D lightened until it clears 4.5:1 on
+     --bg (measures ~4.57:1) — used for small text/icons AND the button
+     hover state, so hovering reads as a deliberate brighten, not a tweak. */
+  --brand-hover: #D56363;
+  --brand-active: #6E1515;
+  --brand-65: rgba(148, 29, 29, 0.65);
+  --brand-45: rgba(148, 29, 29, 0.45);
+  --brand-35: rgba(148, 29, 29, 0.35);
+  --brand-12: rgba(148, 29, 29, 0.12);
+
+  /* Secondary accent — trust marks, verification badges, secondary icons.
+     #93D4D8 measures ~9.97:1 on --bg, safe as text/icon color outright. */
+  --accent: #93D4D8;
+  --accent-hover: #B3E2E5;
+  --accent-12: rgba(147, 212, 216, 0.12);
+
+  --ds-text-primary: #ffffff;
+  --ds-text-secondary: rgba(255, 255, 255, 0.7);
+  --ds-text-muted: rgba(255, 255, 255, 0.5);
+  --ds-text-on-brand: #ffffff;
+
+  /* Self-hosted font stack (next/font/local vars defined in lib/fonts.ts) */
+  --font-wordmark: var(--font-wordmark-face), 'Orbitron', system-ui, sans-serif;
+  --font-display: var(--font-display-face), 'Michroma', system-ui, sans-serif;
+  --font-body: var(--font-body-face), system-ui, -apple-system, sans-serif;
+}
+
+/*
+  `.dark` / `[data-theme=dark]` no longer need their own token block: :root
+  already carries these values, and ThemeProvider forces resolvedTheme to
+  'dark' unconditionally (no toggle UI exists anymore), so this selector is
+  always active. Kept as a selector (not deleted) only because a handful of
+  components still use literal `dark:` Tailwind variants for one-off colors
+  outside the token system (e.g. `dark:text-emerald-400`) — removing the
+  class would silently break those rather than re-theme them.
+*/
+
+/* Base Body Styles */
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--color-page-bg);
+  isolation: isolate;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Presentation only: existing section geometry and responsive utilities remain. */
+@theme inline {
+  --font-sans: var(--font-body);
+}
+
+@layer base {
+  :where(h3, h4, h5, h6) { font-weight: 700; }
+  :where(h3) { letter-spacing: -0.025em; }
+
+  /* Site-wide display treatment: every h1/h2, on every existing page, picks
+     this up automatically — the same rule the design-system Heading
+     component encodes for new pages. Never below 20px, per the type rules. */
+  :where(h1) {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(1.75rem, 1.2rem + 2.6vw, 3.25rem);
+    line-height: 1.1;
+  }
+  :where(h2) {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    font-size: clamp(1.375rem, 1.1rem + 1.3vw, 2rem);
+    line-height: 1.2;
+  }
+}
+
+@layer components {
+  .utility-label, .glass-btn, .split-button {
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Content surfaces stay solid: translucency belongs to floating layers. */
+  .glass-card {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 16px -8px color-mix(in srgb, var(--navy-900) 16%, transparent);
+  }
+
+  .glass-navigation, .glass-overlay {
+    background: var(--color-surface);
+    border-color: color-mix(in srgb, var(--color-border) 75%, transparent);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--white) 8%, transparent) inset,
+      0 8px 24px -16px color-mix(in srgb, var(--navy-900) 25%, transparent);
+  }
+
+  @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+    .glass-navigation, .glass-overlay {
+      /* 98% bounds contrast even over opposite-theme content. */
+      background: color-mix(in srgb, var(--color-surface) 98%, transparent);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+  }
+
+  .glass-dialog::backdrop {
+    background: color-mix(in srgb, var(--navy-900) 48%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .glass-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.15rem;
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.25;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    box-shadow: 0 2px 8px -4px color-mix(in srgb, var(--navy-900) 20%, transparent);
+    transition: background-color 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .glass-btn:hover:not(:disabled) {
+    background-color: var(--color-surface-tinted);
+    border-color: var(--color-text-secondary);
+  }
+
+  /* Semantic labels stay legible when a caller supplies an accent utility. */
+  .glass-btn.glass-btn-accent > svg { color: var(--color-cta-text); }
+
+  /* Glossy neon fill: a diagonal light-sheen layer (unchanged) sits on top
+     of an animated red -> slate-teal gradient instead of the old flat
+     --color-cta-bg. The teal endpoint, not the light aqua, is what keeps
+     white button text legible across the whole sweep (~6.8:1 at worst). */
+  .glass-btn-accent, .liquid-cta {
+    background-color: var(--color-cta-bg);
+    background-image:
+      linear-gradient(125deg, color-mix(in srgb, var(--white) 14%, transparent), transparent 55%),
+      linear-gradient(135deg, var(--brand-hover) 0%, var(--brand) 40%, var(--brand-active) 70%, var(--navy-600) 100%);
+    background-size: 200% 200%, 220% 220%;
+    background-position: 100% 50%, 0% 50%;
+    border-color: var(--color-cta-bg);
+    color: var(--color-cta-text);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--white) 28%, transparent) inset,
+      0 4px 12px -6px color-mix(in srgb, var(--orange-600) 45%, transparent);
+    transition: background-position 240ms ease, box-shadow 240ms ease;
+    animation: ds-gradient-flow 7s ease-in-out infinite;
+  }
+
+  /* The continuous animation already supplies motion, so hover only lifts
+     the glow — a separate hover background-position would fight the
+     running keyframes every frame instead of layering cleanly. */
+  .glass-btn-accent:hover:not(:disabled), .split-button:not(:disabled):hover .liquid-cta {
+    background-color: var(--color-cta-bg);
+    border-color: var(--color-cta-bg);
+    color: var(--color-cta-text);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--white) 40%, transparent) inset,
+      0 6px 18px -7px color-mix(in srgb, var(--orange-600) 50%, transparent);
+  }
+
+  .glass-btn-accent:active:not(:disabled), .split-button:not(:disabled):active .liquid-cta {
+    box-shadow: 0 2px 4px color-mix(in srgb, var(--navy-900) 18%, transparent) inset;
+  }
+
+  /* Only theme and display utilities receive soft raised/pressed edges. */
+  .tactile-utility {
+    border-color: var(--color-text-secondary);
+    box-shadow: 2px 2px 5px color-mix(in srgb, var(--navy-900) 12%, transparent),
+      -2px -2px 5px color-mix(in srgb, var(--white) 12%, transparent),
+      0 1px 0 color-mix(in srgb, var(--white) 14%, transparent) inset;
+  }
+  .tactile-utility[aria-pressed=true], .tactile-utility:active {
+    box-shadow: 2px 2px 4px color-mix(in srgb, var(--navy-900) 18%, transparent) inset,
+      -1px -1px 3px color-mix(in srgb, var(--white) 10%, transparent) inset;
+  }
+
+  .aligned-list > li { align-items: flex-start; line-height: 1.65; }
+  .aligned-list > li > svg { margin-top: 0.2em; }
+}
+
+/* Respect both OS and the existing in-app motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  .glass-btn, .split-button, .split-button > span, .split-button svg {
+    transform: none !important;
+    scale: none !important;
+    rotate: none !important;
+    translate: none !important;
+  }
+}
+.reduced-motion :is(.glass-btn, .split-button, .split-button > span, .split-button svg) {
+  transform: none !important;
+  scale: none !important;
+  rotate: none !important;
+  translate: none !important;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-navigation, .glass-overlay { background: var(--color-surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .glass-dialog::backdrop { -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+button:disabled { cursor: not-allowed; }
+::selection { background: var(--orange-50); color: var(--navy-900); }
+input, textarea { caret-color: var(--color-link); }
+html.reduced-motion { scroll-behavior: auto; }
+.reduced-motion *, .reduced-motion *::before, .reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+@media (max-width: 767px) {
+  input:not([type=checkbox]):not([type=radio]), select, textarea { font-size: 16px; }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-page-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--navy-400);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--navy-600);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--navy-400) var(--color-page-bg);
+}
+
+/* Skip link focus utility */
+.skip-to-content:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--orange-600);
+  color: var(--navy-900);
+  border-radius: 9999px;
+  font-weight: 700;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* =====================================================================
+   NEW DARK DESIGN SYSTEM — component-layer support classes
+   Used by components/design-system/*, the global Nav/mobile dock, and
+   /design-system. Scoped under .ds-root so legacy pages are never affected.
+   ===================================================================== */
+@layer components {
+  .ds-root {
+    color-scheme: dark;
+    background: var(--bg);
+    color: var(--ds-text-primary);
+    font-family: var(--font-body);
+  }
+
+  /* Hard type rule: display faces are drawn for caps, never used under 20px. */
+  .ds-eyebrow {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 1.25rem; /* 20px floor */
+    line-height: 1.3;
+  }
+
+  .ds-h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(2.5rem, 1.6rem + 4vw, 4.75rem);
+    line-height: 1.05;
+  }
+
+  .ds-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);
+    line-height: 1.15;
+  }
+
+  .ds-stat {
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+    line-height: 1;
+  }
+
+  .ds-wordmark {
+    font-family: var(--font-wordmark);
+    letter-spacing: 0.04em;
+    font-size: 1.25rem; /* 20px floor */
+  }
+
+  /* 60/30/10 discipline: this is the only focus treatment red is allowed
+     to repeat across a view, since it marks interaction, not decoration. */
+  .ds-focus-ring:focus-visible {
+    outline: 3px solid var(--brand-35);
+    outline-offset: 2px;
+  }
+
+  /* ===================================================================
+     MICRO-INTERACTIONS — hooked onto the shared interactive primitives
+     (.ds-focus-ring sits on every nav link, button, the logo and footer
+     link; .ds-card sits on every card-shaped surface) so every clickable
+     surface on every page picks up consistent feedback for free, instead
+     of hand-wiring hover states per page. Hover-driven transforms are
+     gated to real pointers so taps on touch devices never get stuck
+     mid-hover; press feedback (:active) applies everywhere.
+     =================================================================== */
+  .ds-focus-ring {
+    transition: transform 200ms ease;
+  }
+  .ds-focus-ring:active {
+    transform: scale(0.96);
+  }
+  .ds-focus-ring > svg:last-child {
+    transition: transform 200ms ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ds-focus-ring:hover {
+      transform: translateY(-1px);
+    }
+    .ds-focus-ring:hover > svg:last-child {
+      transform: translateX(3px);
+    }
+  }
+
+  /* Lift is a translate, never a scale — cards stay geometrically stable
+     so nothing shifts text baselines inside them; the duo-tone glow does
+     the rest of the "lit up" feeling. */
+  .ds-card {
+    background: var(--surface-1);
+    border: 1px solid var(--ds-border);
+    transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+  }
+  /* A duo-tone neon halo on hover — red near the edge, a hint of aqua
+     further out — instead of a single flat color glow. */
+  .ds-card:hover {
+    border-color: var(--brand-65);
+    box-shadow:
+      0 0 0 1px var(--brand-12),
+      0 8px 32px -14px var(--brand-45),
+      0 20px 56px -24px var(--accent-12);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ds-card:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Gradient underline sweep for the desktop primary nav — grows in from
+     the left on hover, stays filled for the current page. */
+  .ds-nav-link {
+    position: relative;
+  }
+  .ds-nav-link::after {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 6px;
+    height: 2px;
+    border-radius: 1px;
+    background: linear-gradient(90deg, var(--brand-hover), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 250ms ease;
+  }
+  .ds-nav-link[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ds-nav-link:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Fixed scroll-depth indicator, mounted once in the root layout. */
+  .ds-scroll-progress {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 3px;
+    z-index: 60;
+    pointer-events: none;
+  }
+  .ds-scroll-progress-bar {
+    height: 100%;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background-image: linear-gradient(90deg, var(--brand-hover) 0%, var(--accent) 50%, var(--brand-hover) 100%);
+    background-size: 200% auto;
+    animation: ds-gradient-flow-x 4s linear infinite;
+    box-shadow: 0 0 12px var(--brand-45);
+    transition: transform 80ms linear;
+  }
+
+  /* Infinite-scroll tech/partner logo strip — a fade-masked track of
+     doubled content looping via the pre-existing `marquee` keyframe,
+     pausing on hover/focus so it's readable on demand. */
+  .ds-marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  }
+  .ds-marquee-track {
+    animation: marquee 26s linear infinite;
+  }
+  .ds-marquee-mask:hover .ds-marquee-track,
+  .ds-marquee-mask:focus-within .ds-marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* A faint dot-grid, used behind hero-style sections for texture without
+     the weight of a photo or an animated canvas background. */
+  .ds-dot-grid {
+    background-image: radial-gradient(circle, var(--ds-border-strong) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Neomorphism: soft dual-shadow extrusion on a near-black surface. */
+  .ds-neomorphic {
+    background: var(--surface-2);
+    box-shadow:
+      6px 6px 14px rgba(0, 0, 0, 0.55),
+      -4px -4px 10px rgba(255, 255, 255, 0.03);
+  }
+  .ds-neomorphic-pressed {
+    background: var(--surface-2);
+    box-shadow:
+      inset 3px 3px 8px rgba(0, 0, 0, 0.6),
+      inset -2px -2px 6px rgba(255, 255, 255, 0.03);
+  }
+
+  /* A slow breathing glow for the one primary CTA that should read as
+     "alive" — software-product feel rather than a static marketing button.
+     Opt-in via .ds-pulse-glow so it stays rare (one per viewport). */
+  .ds-pulse-glow {
+    animation: ds-pulse-glow 2.8s ease-in-out infinite;
+  }
+
+  /* =====================================================================
+     GLOSSY NEON GRADIENTS — brand-red to slate-teal, never the light aqua
+     as a fill color: white text needs to sit on top of this everywhere
+     it's used (buttons, badges, CTA bands), and white-on-light-aqua fails
+     badly. The glossy sheen (a soft white highlight layered on top, like
+     light catching a glass surface) plus a slow animated flow is what
+     reads as "neon" rather than a flat corporate gradient.
+     ===================================================================== */
+  .ds-gradient-brand {
+    background-image:
+      linear-gradient(120deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 45%),
+      linear-gradient(135deg, var(--brand-hover) 0%, var(--brand) 40%, var(--brand-active) 70%, var(--navy-600) 100%);
+    background-size: 100% 100%, 220% 220%;
+    background-position: 0% 0%, 0% 50%;
+    animation: ds-gradient-flow 7s ease-in-out infinite;
+  }
+
+  /* Gradient TEXT for accent words — every stop here independently clears
+     4.5:1 on --bg (brand-hover ~4.57:1, accent ~9.97:1, accent-hover
+     higher still), so the gradient never passes through an unsafe shade
+     the way the raw --brand red would. */
+  .ds-gradient-text {
+    background-image: linear-gradient(90deg, var(--brand-hover) 0%, var(--accent) 60%, var(--accent-hover) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: ds-gradient-flow-x 6s ease-in-out infinite;
+  }
+
+  /* A multi-color "neon" glow ring — decorative only (blurred, behind
+     content), so it's free to sweep through the light aqua too. */
+  .ds-glow-neon {
+    position: relative;
+  }
+  .ds-glow-neon::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--brand), var(--accent), var(--brand-hover));
+    background-size: 200% 200%;
+    opacity: 0;
+    filter: blur(16px);
+    transition: opacity 300ms ease;
+    animation: ds-gradient-flow 5s ease-in-out infinite;
+  }
+  .ds-glow-neon:hover::before {
+    opacity: 0.55;
+  }
+}
+
+@keyframes ds-pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--brand-35); }
+  50% { box-shadow: 0 0 0 10px transparent; }
+}
+
+@keyframes ds-gradient-flow {
+  0%, 100% { background-position: 0% 0%, 0% 50%; }
+  50% { background-position: 0% 0%, 100% 50%; }
+}
+
+@keyframes ds-gradient-flow-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
