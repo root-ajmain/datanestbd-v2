@@ -10,6 +10,7 @@ import { AppShell } from '@/components/shell/AppShell';
 import { LeadForm } from '@/components/forms/LeadForm';
 import { AnimatedWorkflow } from '@/components/design-system/AnimatedWorkflow';
 import { projectWorkflows } from '@/lib/project-workflows';
+import { Reveal } from '@/components/design-system/Reveal';
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -62,9 +63,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </section>
 
         {projectWorkflows[project.id] && (
-          <AnimatedWorkflow headline={`How ${project.title} moves end to end`} steps={projectWorkflows[project.id]} />
+          <Reveal>
+            <AnimatedWorkflow headline={`How ${project.title} moves end to end`} steps={projectWorkflows[project.id]} />
+          </Reveal>
         )}
 
+        <Reveal>
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="glass-card p-6 rounded-3xl space-y-3 shadow-md">
             <h2 className="text-base font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
@@ -84,7 +88,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </p>
           </div>
         </section>
+        </Reveal>
 
+        <Reveal>
         <section className="glass-card p-8 rounded-3xl space-y-4 shadow-md">
           <h2 className="text-xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
             Architectural Layers & Components
@@ -98,7 +104,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             ))}
           </ul>
         </section>
+        </Reveal>
 
+        <Reveal>
         <section className="glass-card p-8 rounded-3xl space-y-4 shadow-md">
           <h2 className="text-xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
             Outcomes & Impact
@@ -112,6 +120,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             ))}
           </ul>
         </section>
+        </Reveal>
 
         <section className="pt-6">
           <LeadForm

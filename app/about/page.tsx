@@ -7,6 +7,7 @@ import { AppShell } from '@/components/shell/AppShell';
 import { SplitButton } from '@/components/ui/SplitButton';
 import { WhatChimpProofBadge } from '@/components/ui/BrandBadges';
 import { AnimatedWorkflow } from '@/components/design-system/AnimatedWorkflow';
+import { Reveal } from '@/components/design-system/Reveal';
 
 const pageContent = getPageContent('/about');
 export const metadata = getPageMetadata('/about');
@@ -29,31 +30,36 @@ export default function AboutPage() {
         </section>
 
         {/* How we work with you — a live process diagram, not a studio photo */}
-        <AnimatedWorkflow
-          headline="How a DataNest BD engagement runs, start to finish"
-          steps={[
-            { label: 'WhatsApp Inquiry', icon: <MessageSquare className="h-5 w-5" aria-hidden="true" /> },
-            { label: 'Discovery Call', icon: <PhoneCall className="h-5 w-5" aria-hidden="true" /> },
-            { label: 'Scope & Quote', icon: <FileText className="h-5 w-5" aria-hidden="true" /> },
-            { label: 'Build', icon: <Hammer className="h-5 w-5" aria-hidden="true" /> },
-            { label: 'Launch', icon: <Rocket className="h-5 w-5" aria-hidden="true" /> },
-          ]}
-        />
+        <Reveal>
+          <AnimatedWorkflow
+            headline="How a DataNest BD engagement runs, start to finish"
+            steps={[
+              { label: 'WhatsApp Inquiry', icon: <MessageSquare className="h-5 w-5" aria-hidden="true" /> },
+              { label: 'Discovery Call', icon: <PhoneCall className="h-5 w-5" aria-hidden="true" /> },
+              { label: 'Scope & Quote', icon: <FileText className="h-5 w-5" aria-hidden="true" /> },
+              { label: 'Build', icon: <Hammer className="h-5 w-5" aria-hidden="true" /> },
+              { label: 'Launch', icon: <Rocket className="h-5 w-5" aria-hidden="true" /> },
+            ]}
+          />
+        </Reveal>
 
         {/* WhatChimp Verification Focus */}
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
-            Verified WhatChimp Silver Partnership
-          </h2>
-          <p className="text-sm leading-relaxed text-[var(--navy-800)] dark:text-[#C7D4DB]">
-            In March 2026, DataNest BD achieved verified Silver Agency Partner status with WhatChimp. This partnership equips our engineering team with authorized tooling to provision Meta WhatsApp Business Accounts, configure WhatChimp workspaces, and manage high-scale conversation workflows for clients with full compliance.
-          </p>
-          <div className="pt-2">
-            <WhatChimpProofBadge />
-          </div>
-        </section>
+        <Reveal>
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
+              Verified WhatChimp Silver Partnership
+            </h2>
+            <p className="text-sm leading-relaxed text-[var(--navy-800)] dark:text-[#C7D4DB]">
+              In March 2026, DataNest BD achieved verified Silver Agency Partner status with WhatChimp. This partnership equips our engineering team with authorized tooling to provision Meta WhatsApp Business Accounts, configure WhatChimp workspaces, and manage high-scale conversation workflows for clients with full compliance.
+            </p>
+            <div className="pt-2">
+              <WhatChimpProofBadge />
+            </div>
+          </section>
+        </Reveal>
 
         {/* Operating Principles */}
+        <Reveal>
         <section className="glass-card p-8 rounded-3xl space-y-6 shadow-md">
           <h2 className="text-xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
             Our Engineering Principles
@@ -100,52 +106,57 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+        </Reveal>
 
         {/* Contact & Location Details */}
-        <section className="glass-card p-8 rounded-3xl space-y-4 shadow-md">
-          <h2 className="text-xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
-            Delivery Mode & Contact Information
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-[var(--navy-400)] dark:text-[#C7D4DB]">
-            <div className="glass-card p-4 rounded-2xl">
-              <div className="flex items-center gap-2 font-bold text-[var(--navy-900)] dark:text-[var(--white)] mb-1">
-                <MapPin className="h-4 w-4 text-[#93D4D8]" />
-                <span>100% Online Delivery</span>
+        <Reveal>
+          <section className="glass-card p-8 rounded-3xl space-y-4 shadow-md">
+            <h2 className="text-xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
+              Delivery Mode & Contact Information
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-[var(--navy-400)] dark:text-[#C7D4DB]">
+              <div className="glass-card p-4 rounded-2xl">
+                <div className="flex items-center gap-2 font-bold text-[var(--navy-900)] dark:text-[var(--white)] mb-1">
+                  <MapPin className="h-4 w-4 text-[#93D4D8]" />
+                  <span>100% Online Delivery</span>
+                </div>
+                <p>Dhaka, Bangladesh · No physical office visits. Consultations via Google Meet & Zoom.</p>
               </div>
-              <p>Dhaka, Bangladesh · No physical office visits. Consultations via Google Meet & Zoom.</p>
-            </div>
 
-            <div className="glass-card p-4 rounded-2xl">
-              <div className="flex items-center gap-2 font-bold text-[var(--navy-900)] dark:text-[var(--white)] mb-1">
-                <Clock className="h-4 w-4 text-[var(--red-700)] dark:text-[var(--orange-500)]" />
-                <span>Working Hours</span>
+              <div className="glass-card p-4 rounded-2xl">
+                <div className="flex items-center gap-2 font-bold text-[var(--navy-900)] dark:text-[var(--white)] mb-1">
+                  <Clock className="h-4 w-4 text-[var(--red-700)] dark:text-[var(--orange-500)]" />
+                  <span>Working Hours</span>
+                </div>
+                <p>Sunday – Thursday · GMT+6 (Asia/Dhaka)</p>
               </div>
-              <p>Sunday – Thursday · GMT+6 (Asia/Dhaka)</p>
-            </div>
 
-            <div className="glass-card p-4 rounded-2xl">
-              <div className="flex items-center gap-2 font-bold text-[var(--navy-900)] dark:text-[var(--white)] mb-1">
-                <Mail className="h-4 w-4 text-[var(--red-700)] dark:text-[var(--orange-500)]" />
-                <span>WhatsApp & Email</span>
+              <div className="glass-card p-4 rounded-2xl">
+                <div className="flex items-center gap-2 font-bold text-[var(--navy-900)] dark:text-[var(--white)] mb-1">
+                  <Mail className="h-4 w-4 text-[var(--red-700)] dark:text-[var(--orange-500)]" />
+                  <span>WhatsApp & Email</span>
+                </div>
+                <p>+880 1886-123456</p>
+                <a href={`mailto:${siteConfig.contact.email}`} className="hover:underline font-medium text-[var(--red-700)] dark:text-[var(--orange-500)]">
+                  {siteConfig.contact.email}
+                </a>
               </div>
-              <p>+880 1886-123456</p>
-              <a href={`mailto:${siteConfig.contact.email}`} className="hover:underline font-medium text-[var(--red-700)] dark:text-[var(--orange-500)]">
-                {siteConfig.contact.email}
-              </a>
             </div>
-          </div>
-        </section>
+          </section>
+        </Reveal>
 
-        <section className="text-center pt-4">
-          <a
-            href="https://wa.me/8801886123456?text=Hello%20DataNest%20BD%2C%20I%20would%20like%20to%20consult%20with%20you%20via%20Google%20Meet%2FZoom."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="glass-btn glass-btn-accent text-sm py-3 px-6 rounded-2xl inline-flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95"
-          >
-            <span>Connect on WhatsApp</span>
-          </a>
-        </section>
+        <Reveal>
+          <section className="text-center pt-4">
+            <a
+              href="https://wa.me/8801886123456?text=Hello%20DataNest%20BD%2C%20I%20would%20like%20to%20consult%20with%20you%20via%20Google%20Meet%2FZoom."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-btn glass-btn-accent text-sm py-3 px-6 rounded-2xl inline-flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95"
+            >
+              <span>Connect on WhatsApp</span>
+            </a>
+          </section>
+        </Reveal>
       </div>
     </AppShell>
   );

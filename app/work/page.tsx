@@ -7,6 +7,7 @@ import { AppShell } from '@/components/shell/AppShell';
 import { SplitButton } from '@/components/ui/SplitButton';
 import { AnimatedWorkflow } from '@/components/design-system/AnimatedWorkflow';
 import { projectWorkflows } from '@/lib/project-workflows';
+import { Reveal } from '@/components/design-system/Reveal';
 
 const pageContent = getPageContent('/work');
 export const metadata = getPageMetadata('/work');
@@ -30,9 +31,9 @@ export default function WorkPage() {
 
         {/* Project Cards */}
         <div className="space-y-8">
-          {projects.map((proj) => (
+          {projects.map((proj, idx) => (
+            <Reveal key={proj.id} delay={Math.min(idx, 3) * 0.08}>
             <div
-              key={proj.id}
               className="glass-card rounded-3xl p-6 md:p-8 space-y-6 hover:border-white/80 dark:hover:border-white/30 transition-all shadow-md"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-black/10 dark:border-white/10">
@@ -104,23 +105,26 @@ export default function WorkPage() {
                 </Link>
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
 
         {/* CTA */}
-        <section className="glass-card p-8 rounded-3xl text-center space-y-4 shadow-md">
-          <h2 className="text-2xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
-            Need a similar system for your business?
-          </h2>
-          <p className="text-sm text-[var(--navy-800)] dark:text-[#C7D4DB] max-w-lg mx-auto">
-            Discuss your requirements with our engineering team in Dhaka. We review workflows and provide candid technical feedback.
-          </p>
-          <div className="pt-2 flex justify-center">
-            <SplitButton href="/contact" variant="primary">
-              Discuss your project
-            </SplitButton>
-          </div>
-        </section>
+        <Reveal>
+          <section className="glass-card p-8 rounded-3xl text-center space-y-4 shadow-md">
+            <h2 className="text-2xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
+              Need a similar system for your business?
+            </h2>
+            <p className="text-sm text-[var(--navy-800)] dark:text-[#C7D4DB] max-w-lg mx-auto">
+              Discuss your requirements with our engineering team in Dhaka. We review workflows and provide candid technical feedback.
+            </p>
+            <div className="pt-2 flex justify-center">
+              <SplitButton href="/contact" variant="primary">
+                Discuss your project
+              </SplitButton>
+            </div>
+          </section>
+        </Reveal>
       </div>
     </AppShell>
   );

@@ -30,7 +30,7 @@ export function PricingGrid() {
       <div
         role="tablist"
         aria-label="Billing cycle"
-        className="mx-auto mb-10 flex w-full max-w-md items-center gap-1 rounded-full border border-[var(--ds-border)] bg-[var(--surface-1)] p-1"
+        className="ds-glass mx-auto mb-10 flex w-full max-w-md items-center gap-1 rounded-full p-1"
       >
         {billingCycles.map((c) => (
           <button

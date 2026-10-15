@@ -33,6 +33,8 @@ import { SplitButton } from '@/components/ui/SplitButton';
 import { LeadForm } from '@/components/forms/LeadForm';
 import { IncludedShowcase } from '@/components/design-system/IncludedShowcase';
 import { AnimatedWorkflow, type WorkflowStep } from '@/components/design-system/AnimatedWorkflow';
+import { ThreePrioritiesLoop } from '@/components/design-system/ThreePrioritiesLoop';
+import { Reveal } from '@/components/design-system/Reveal';
 import type { LucideIcon } from 'lucide-react';
 
 // Pages here are Server Components; only plain data or already-rendered
@@ -168,12 +170,23 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        {/* Live workflow visual, not a static screenshot */}
-        {serviceWorkflows[service.id] && (
-          <AnimatedWorkflow headline={`How ${service.title} moves end to end`} steps={serviceWorkflows[service.id]} />
+        {/* Live workflow visual, not a static screenshot — the WhatsApp API
+            page gets the purpose-built inbox-to-tasks story instead of the
+            generic step diagram every other service uses. */}
+        <Reveal>
+        {service.id === 'whatsapp-api' ? (
+          <section className="glass-card overflow-hidden rounded-3xl p-2 sm:p-4">
+            <ThreePrioritiesLoop />
+          </section>
+        ) : (
+          serviceWorkflows[service.id] && (
+            <AnimatedWorkflow headline={`How ${service.title} moves end to end`} steps={serviceWorkflows[service.id]} />
+          )
         )}
+        </Reveal>
 
         {/* Overview Summary */}
+        <Reveal>
         <section className="glass-card p-8 rounded-3xl space-y-4 shadow-md">
           <h2 className="text-xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
             Service Architecture & Scope
@@ -186,16 +199,18 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             {' · '}<Link href="/work" className="text-[var(--color-link)] underline">Review reference architectures</Link>
           </p>
         </section>
+        </Reveal>
 
         {/* Deliverables */}
+        <Reveal>
         <section className="space-y-4">
           <h2 className="text-xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
             What We Deliver
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {service.deliverables.map((item, idx) => (
+              <Reveal key={idx} variant="scale" delay={Math.min(idx, 5) * 0.05}>
               <div
-                key={idx}
                 className="glass-card p-4 rounded-2xl flex items-start gap-3"
               >
                 <CheckCircle2 className="h-5 w-5 text-[var(--red-700)] dark:text-[var(--orange-500)] shrink-0 mt-0.5" />
@@ -203,11 +218,14 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   {item}
                 </span>
               </div>
+              </Reveal>
             ))}
           </div>
         </section>
+        </Reveal>
 
         {/* Implementation Process */}
+        <Reveal>
         <section className="space-y-4">
           <h2 className="text-xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
             Implementation Process
@@ -228,8 +246,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             ))}
           </div>
         </section>
+        </Reveal>
 
         {/* Technical Boundaries & Exclusions */}
+        <Reveal>
         <section className="p-6 rounded-3xl border border-[var(--red-700)] bg-[var(--red-50)] dark:bg-[var(--navy-800)] space-y-3">
           <div className="flex items-center gap-2 text-sm font-bold text-[var(--red-700)] dark:text-[var(--orange-500)]">
             <ShieldAlert className="h-5 w-5 shrink-0 text-[var(--red-700)] dark:text-[var(--orange-500)]" />
@@ -247,8 +267,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             ))}
           </ul>
         </section>
+        </Reveal>
 
         {/* FAQs */}
+        <Reveal>
         <section className="space-y-4">
           <h2 className="text-xl font-bold text-[var(--navy-900)] dark:text-[var(--white)]">
             Frequently Asked Questions
@@ -270,6 +292,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             ))}
           </div>
         </section>
+        </Reveal>
 
         {/* What's included with every DataNest BD engagement — the WhatsApp API
             page already covers this in full on /pricing, so it's skipped here. */}

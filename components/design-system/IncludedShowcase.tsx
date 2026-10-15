@@ -30,7 +30,7 @@ export function IncludedShowcase({
   className = '',
 }: IncludedShowcaseProps) {
   return (
-    <section className={`relative overflow-hidden rounded-3xl border border-[var(--brand-35)] bg-[var(--surface-1)] p-6 sm:p-10 ${className}`}>
+    <section className={`ds-glass relative rounded-3xl border-[var(--brand-35)] p-6 sm:p-10 ${className}`}>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full blur-3xl"
@@ -49,7 +49,7 @@ export function IncludedShowcase({
             const Icon = icons[idx % icons.length];
             return (
               <Reveal key={item.title} delay={idx * 0.06} variant="scale">
-                <div className="flex items-start gap-3 rounded-2xl border border-[var(--ds-border)] bg-[var(--surface-2)] p-4 transition-colors duration-200 hover:border-[var(--brand-65)]">
+                <div className="ds-glass-tile flex items-start gap-3 rounded-2xl p-4 transition-colors duration-200 hover:border-[var(--brand-65)]">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--brand-12)] text-[var(--brand-hover)]">
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </span>

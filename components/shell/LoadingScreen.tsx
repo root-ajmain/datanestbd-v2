@@ -35,7 +35,7 @@ export function LoadingScreen() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-7"
-          style={{ background: 'radial-gradient(ellipse at 90% 3%, #e9f2e7 0, transparent 35%), #f8faf7' }}
+          style={{ background: 'radial-gradient(ellipse 60% 40% at 12% -5%, #2f8fff29 0%, transparent 60%), radial-gradient(ellipse 50% 35% at 100% 8%, #ff8a3d1f 0%, transparent 55%), #050a14' }}
         >
           {/*
             No mount-triggered initial/animate transition on this wrapper or

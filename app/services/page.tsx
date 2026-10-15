@@ -6,6 +6,8 @@ import { services, serviceGroups } from '@/content/services';
 import { AppShell } from '@/components/shell/AppShell';
 import { SplitButton } from '@/components/ui/SplitButton';
 import { LeadForm } from '@/components/forms/LeadForm';
+import { KineticServicesReel } from '@/components/design-system/KineticServicesReel';
+import { Reveal } from '@/components/design-system/Reveal';
 
 const pageContent = getPageContent('/services');
 export const metadata = getPageMetadata('/services');
@@ -27,6 +29,13 @@ export default function ServicesPage() {
           </p>
         </section>
 
+        {/* One word, four services, one message */}
+        <section className="kinetic-reel-section glass-card overflow-hidden rounded-3xl p-2 sm:p-4">
+          <div style={{ aspectRatio: '16 / 9' }}>
+            <KineticServicesReel className="h-full w-full" />
+          </div>
+        </section>
+
         {/* Grouped Services */}
         {serviceGroups.map((group) => {
           const groupServices = services.filter((s) => group.serviceIds.includes(s.id));
@@ -45,9 +54,9 @@ export default function ServicesPage() {
               </div>
 
               <div className="grid grid-cols-1 gap-6">
-                {groupServices.map((svc) => (
+                {groupServices.map((svc, idx) => (
+                  <Reveal key={svc.id} delay={Math.min(idx, 3) * 0.08}>
                   <div
-                    key={svc.id}
                     className="glass-card p-6 md:p-8 rounded-3xl space-y-5 hover:border-white/80 dark:hover:border-white/30 transition-all shadow-md"
                   >
                     <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
@@ -95,6 +104,7 @@ export default function ServicesPage() {
                       </Link>
                     </div>
                   </div>
+                  </Reveal>
                 ))}
               </div>
             </section>
@@ -102,12 +112,14 @@ export default function ServicesPage() {
         })}
 
         {/* Lead Form */}
-        <section className="pt-8">
-          <LeadForm
-            title="Have a specific project in mind?"
-            subtitle="Select the service you are interested in and our team will get back to you with architectural guidance."
-          />
-        </section>
+        <Reveal>
+          <section className="pt-8">
+            <LeadForm
+              title="Have a specific project in mind?"
+              subtitle="Select the service you are interested in and our team will get back to you with architectural guidance."
+            />
+          </section>
+        </Reveal>
       </div>
     </AppShell>
   );

@@ -37,10 +37,10 @@ export function GlobalNavbar() {
       <motion.div
         animate={{
           height: scrolled ? 56 : 64,
-          backgroundColor: scrolled ? 'rgba(255,255,255,0.90)' : 'rgba(255,255,255,0.65)',
+          backgroundColor: scrolled ? 'rgba(17,37,68,0.82)' : 'rgba(17,37,68,0.55)',
           boxShadow: scrolled
-            ? '0 12px 35px -18px rgba(36,82,70,0.25), 0 0 0 1px rgba(36,82,70,0.10)'
-            : '0 8px 24px -16px rgba(36,82,70,0.15), 0 0 0 1px rgba(36,82,70,0.08)',
+            ? '0 12px 35px -18px rgba(0,4,11,0.55), 0 0 0 1px rgba(130,170,255,0.22)'
+            : '0 8px 24px -16px rgba(0,4,11,0.4), 0 0 0 1px rgba(130,170,255,0.16)',
         }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
         className="flex items-center justify-between gap-4 rounded-2xl px-5 backdrop-blur-xl sm:px-6"

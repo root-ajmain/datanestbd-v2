@@ -30,7 +30,7 @@ export function AnimatedWorkflow({ headline, steps, className = '' }: AnimatedWo
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative overflow-hidden rounded-2xl border border-[var(--ds-border)] bg-[var(--surface-1)] p-6 sm:p-8 ${className}`}
+      className={`ds-glass relative rounded-2xl p-6 sm:p-8 ${className}`}
     >
       <div
         aria-hidden="true"

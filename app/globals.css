@@ -8,30 +8,29 @@
 :root {
   --font-ui: "Inter", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
   /* =====================================================================
-     Dark Teal — Primary Base (repointed to the Bangladesh-industry palette:
-     #0B2224 / #336269 / #93D4D8 / #941D1D — see the DARK-MODE DESIGN SYSTEM
-     block below for the full rationale and the derived accessible tints).
+     Near-black Navy — Primary Base, repointed to colors pulled straight
+     from the DataNest BD mark itself (#050a14 / #0b1830 / #2f8fff / #ff8a3d
+     — see the DARK-MODE DESIGN SYSTEM block below for the full rationale).
      ===================================================================== */
-  --navy-900: #0B2224;   /* deepest surface, footer, headings — = --bg exactly */
-  --navy-800: #112A2C;   /* BASE — nav, hero, dark sections, body text on light */
-  --navy-600: #336269;   /* elevated card surface on dark sections — the given slate-teal */
-  --navy-400: #7FA0A4;   /* secondary / muted text (5.9:1 on --navy-900) */
-  --navy-50:  #E8F6F7;   /* tinted section background */
+  --navy-900: #050a14;   /* deepest surface, footer, headings — = --bg exactly */
+  --navy-800: #0b1830;   /* BASE — nav, hero, dark sections, body text on light */
+  --navy-600: #17305c;   /* elevated card surface on dark sections */
+  --navy-400: #8fa6d9;   /* secondary / muted text */
+  --navy-50:  #122544;   /* tinted section background */
 
   /* =====================================================================
-     Legacy accent names, repointed to the new brand-red system — every
-     existing page/component across the site references these two palettes
-     (never the new --brand tokens directly), so repointing here is what
-     actually rolls the new design out everywhere at once.
+     Legacy accent names, repointed to the new logo-blue brand system —
+     every existing page/component across the site references these two
+     palettes (never the new --brand tokens directly), so repointing here
+     is what actually rolls the new design out everywhere at once.
 
      --orange-500 / --red-700 are the dual-purpose "accent icon or small
      text" slots used throughout (eyebrows, step numbers, inline icons).
-     The base --brand (#df2531) measures 4.45:1 on black — under the 4.5:1
-     AA floor for body-scale text — so these resolve to --brand-hover
-     (#e8434d) instead, which independently verifies at ~5.3:1 even at
-     11-12px. --orange-600/700 and --red-800 back actual button/background
-     fills, where the saturated base red is correct and the text on top of
-     them is white (fixed separately wherever it wasn't already).
+     The base --brand (#2f8fff) already clears 4.5:1 on the near-black
+     canvas, but routes through --brand-hover (#6ab2ff) here anyway so
+     hovering still reads as a deliberate brighten. --orange-600/700 and
+     --red-800 back actual button/background fills, where the saturated
+     base blue is correct and the text on top of them is white.
      ===================================================================== */
   --orange-600: var(--brand);
   --orange-700: var(--brand-active);
@@ -121,48 +120,46 @@
 
   /* =====================================================================
      DARK-MODE DESIGN SYSTEM — primary token definitions
-     Palette: #0B2224 (deep teal-black) / #336269 (slate-teal) / #93D4D8
-     (aqua) / #941D1D (brick red) — chosen for Bangladesh's tech/fintech
-     market: the red and the green-leaning teal echo the national flag
-     without being literal, and read as "serious infrastructure" rather
-     than a consumer-app palette. Red stays the single CTA/signal color;
-     teal and aqua carry everything else (surfaces, trust marks, secondary
-     accents) so the red never has to compete with itself for attention.
+     Palette lifted directly from the DataNest BD mark: #050a14 (near-black
+     navy canvas) / #2f8fff→#0a62e0 (the "D" speech-bubble blue) / #ff8a3d
+     (the "N" plate's orange, pulled in from its #ff3b2f→#ffb000 gradient).
+     Blue stays the primary CTA/signal color; orange is the one deliberate
+     second accent (eyebrows, live/status dots, duo-tone glow) so it reads
+     as "this brand's own neon," not a generic dark-mode default.
 
-     #941D1D measures only ~1.9:1 against #0B2224 — far too low for text or
-     icons, only usable as a filled background with white text on top (see
-     --brand-hover below for the derived tint that actually works as text).
+     Glow and glass surfaces lean on these two hues at low alpha rather
+     than introducing new colors, so "neon gradient" and "liquid glass"
+     stay visibly the same brand instead of two competing effects.
      The legacy --color-, --orange- and --red- prefixed names above are
      repointed to these (site-wide rollout). New components should
      reference these directly rather than going through the legacy names.
      ===================================================================== */
-  --bg: #0B2224;
-  --surface-1: #112A2C;
-  --surface-2: #16363A;
-  --surface-3: #1D454A;
-  --ds-border: rgba(147, 212, 216, 0.14);
-  --ds-border-strong: rgba(147, 212, 216, 0.32);
+  --bg: #050a14;
+  --surface-1: #0b1830;
+  --surface-2: #112544;
+  --surface-3: #17305c;
+  --ds-border: rgba(130, 170, 255, 0.16);
+  --ds-border-strong: rgba(130, 170, 255, 0.3);
 
-  --brand: #941D1D;
-  /* Derived tint, not a new hue: #941D1D lightened until it clears 4.5:1 on
-     --bg (measures ~4.57:1) — used for small text/icons AND the button
-     hover state, so hovering reads as a deliberate brighten, not a tweak. */
-  --brand-hover: #D56363;
-  --brand-active: #6E1515;
-  --brand-65: rgba(148, 29, 29, 0.65);
-  --brand-45: rgba(148, 29, 29, 0.45);
-  --brand-35: rgba(148, 29, 29, 0.35);
-  --brand-12: rgba(148, 29, 29, 0.12);
+  --brand: #2f8fff;
+  /* Lightened from the logo's bubble-top blue so it still pops as small
+     text/icons and a hover state against the near-black canvas. */
+  --brand-hover: #6ab2ff;
+  --brand-active: #0a62e0;
+  --brand-65: rgba(47, 143, 255, 0.65);
+  --brand-45: rgba(47, 143, 255, 0.45);
+  --brand-35: rgba(47, 143, 255, 0.35);
+  --brand-12: rgba(47, 143, 255, 0.12);
 
-  /* Secondary accent — trust marks, verification badges, secondary icons.
-     #93D4D8 measures ~9.97:1 on --bg, safe as text/icon color outright. */
-  --accent: #93D4D8;
-  --accent-hover: #B3E2E5;
-  --accent-12: rgba(147, 212, 216, 0.12);
+  /* Secondary accent — the logo's orange, used for eyebrows, live/status
+     marks and the one duo-tone glow moment, never for body text at size. */
+  --accent: #ff8a3d;
+  --accent-hover: #ffb24d;
+  --accent-12: rgba(255, 138, 61, 0.14);
 
-  --ds-text-primary: #ffffff;
-  --ds-text-secondary: rgba(255, 255, 255, 0.7);
-  --ds-text-muted: rgba(255, 255, 255, 0.5);
+  --ds-text-primary: #f3f7ff;
+  --ds-text-secondary: rgba(243, 247, 255, 0.72);
+  --ds-text-muted: rgba(243, 247, 255, 0.5);
   --ds-text-on-brand: #ffffff;
 
   /* Self-hosted font stack (next/font/local vars defined in lib/fonts.ts) */
@@ -243,12 +240,31 @@ body {
     text-transform: uppercase;
   }
 
-  /* Content surfaces stay solid: translucency belongs to floating layers. */
+  /* True frosted glass: translucent surface + blur/saturate of whatever
+     sits behind it, a hairline rim, and a soft diagonal specular sheen
+     baked in via ::before. Colors are re-skinned per theme (premium.css);
+     the blur/sheen mechanics live here once so every glass surface behaves
+     the same way. isolation+overflow keep the sheen pseudo-element clipped
+     to the rounded corners the caller applies (rounded-2xl, rounded-3xl…). */
   .glass-card {
     position: relative;
-    background: var(--color-surface);
+    isolation: isolate;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
     border: 1px solid var(--color-border);
-    box-shadow: 0 4px 16px -8px color-mix(in srgb, var(--navy-900) 16%, transparent);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--white) 16%, transparent),
+      0 4px 16px -8px color-mix(in srgb, var(--navy-900) 16%, transparent);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    transition: box-shadow 250ms ease, border-color 250ms ease, background-color 250ms ease;
+  }
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(125deg, color-mix(in srgb, var(--white) 20%, transparent) 0%, transparent 45%);
+    pointer-events: none;
   }
 
   .glass-navigation, .glass-overlay {
@@ -262,18 +278,47 @@ body {
     .glass-navigation, .glass-overlay {
       /* 98% bounds contrast even over opposite-theme content. */
       background: color-mix(in srgb, var(--color-surface) 98%, transparent);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      backdrop-filter: blur(20px) saturate(160%);
     }
   }
 
   .glass-dialog::backdrop {
     background: color-mix(in srgb, var(--navy-900) 48%, transparent);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  /* Generic frosted utility for one-off panels/pills/chips that don't fit
+     the card or button shape (billing toggles, "included with every plan"
+     tiles, proof badges). Caller supplies radius/padding/layout. */
+  .ds-glass {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--color-surface) 65%, transparent);
+    border: 1px solid var(--color-border);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--white) 14%, transparent);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+  }
+
+  /* Lighter-weight glass for grid tiles nested inside an already-glass
+     panel — same frost, less blur, so nesting doesn't double-smear. */
+  .ds-glass-tile {
+    position: relative;
+    background: color-mix(in srgb, var(--color-surface-subtle) 55%, transparent);
+    border: 1px solid var(--color-border);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--white) 10%, transparent);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    backdrop-filter: blur(10px) saturate(150%);
+    transition: border-color 200ms ease, background-color 200ms ease;
   }
 
   .glass-btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -283,11 +328,14 @@ body {
     font-size: 0.75rem;
     font-weight: 700;
     line-height: 1.25;
-    background: var(--color-surface);
+    background: color-mix(in srgb, var(--color-surface) 75%, transparent);
     border: 1px solid var(--color-border);
     color: var(--color-text-primary);
-    box-shadow: 0 2px 8px -4px color-mix(in srgb, var(--navy-900) 20%, transparent);
-    transition: background-color 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--white) 18%, transparent),
+      0 2px 8px -4px color-mix(in srgb, var(--navy-900) 20%, transparent);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    transition: background-color 180ms ease, box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease;
     cursor: pointer;
     text-decoration: none;
     user-select: none;
@@ -295,8 +343,25 @@ body {
     text-align: center;
   }
 
+  /* Liquid sheen: a soft diagonal highlight that sweeps across the glass
+     on hover, like light catching a curved surface — the thing that makes
+     "glass" read as liquid rather than a flat tinted panel. */
+  .glass-btn::before {
+    content: '';
+    position: absolute;
+    inset: -40% -60%;
+    z-index: -1;
+    background: linear-gradient(115deg, transparent 30%, color-mix(in srgb, var(--white) 55%, transparent) 48%, transparent 66%);
+    transform: translateX(-60%);
+    transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  .glass-btn:hover::before {
+    transform: translateX(60%);
+  }
+
   .glass-btn:hover:not(:disabled) {
-    background-color: var(--color-surface-tinted);
+    background-color: color-mix(in srgb, var(--color-surface-tinted) 80%, transparent);
     border-color: var(--color-text-secondary);
   }
 
@@ -372,6 +437,12 @@ body {
 @media (prefers-reduced-transparency: reduce) {
   .glass-navigation, .glass-overlay { background: var(--color-surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
   .glass-dialog::backdrop { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .glass-card, .ds-card, .ds-glass, .ds-neomorphic, .glass-btn {
+    background: var(--color-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .glass-card::before, .ds-card::before, .glass-btn::before { display: none; }
 }
 
 
@@ -532,15 +603,30 @@ html.reduced-motion { scroll-behavior: auto; }
      so nothing shifts text baselines inside them; the duo-tone glow does
      the rest of the "lit up" feeling. */
   .ds-card {
-    background: var(--surface-1);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--surface-1) 72%, transparent);
     border: 1px solid var(--ds-border);
-    transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--white) 14%, transparent);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease, background-color 250ms ease;
+  }
+  .ds-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(125deg, color-mix(in srgb, var(--white) 16%, transparent) 0%, transparent 45%);
+    pointer-events: none;
   }
   /* A duo-tone neon halo on hover — red near the edge, a hint of aqua
      further out — instead of a single flat color glow. */
   .ds-card:hover {
     border-color: var(--brand-65);
     box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--white) 20%, transparent),
       0 0 0 1px var(--brand-12),
       0 8px 32px -14px var(--brand-45),
       0 20px 56px -24px var(--accent-12);
@@ -620,9 +706,13 @@ html.reduced-motion { scroll-behavior: auto; }
     background-size: 28px 28px;
   }
 
-  /* Neomorphism: soft dual-shadow extrusion on a near-black surface. */
+  /* Neomorphism: soft dual-shadow extrusion, now on a frosted glass
+     surface rather than a flat one — the dock blurs whatever scrolls
+     beneath it instead of just sitting on top. */
   .ds-neomorphic {
-    background: var(--surface-2);
+    background: color-mix(in srgb, var(--surface-2) 80%, transparent);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
     box-shadow:
       6px 6px 14px rgba(0, 0, 0, 0.55),
       -4px -4px 10px rgba(255, 255, 255, 0.03);
@@ -707,4 +797,137 @@ html.reduced-motion { scroll-behavior: auto; }
 @keyframes ds-gradient-flow-x {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+/* =====================================================================
+   ThreePrioritiesLoop — a miniature task-board UI (inbox → three tasks →
+   done), recolored from a standalone prototype onto the site's dark glass
+   tokens. `tpl-` prefixed throughout and sized almost entirely in
+   container-query units (cqmin/cqw/cqh) off `.tpl-panel`, so the whole
+   widget reflows cleanly at any embed width without a breakpoint list.
+   ===================================================================== */
+.tpl-stage {
+  --tpl-hl: var(--accent);
+  --tpl-hl-ink: var(--accent-hover);
+  --tpl-radius: 3;
+  --tpl-spacing: 4.5;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  container-type: size;
+  color: var(--ds-text-primary);
+}
+.tpl-stage *, .tpl-stage *::before, .tpl-stage *::after { box-sizing: border-box; }
+.tpl-panel {
+  position: absolute; left: 50%; top: 50%;
+  width: min(88cqw, 150cqh); height: min(80cqh, 80cqw);
+  container-type: size;
+  background: linear-gradient(145deg, rgba(var(--glass-tint),0.14), rgba(var(--glass-tint),0.05));
+  border: 1px solid var(--glass-border);
+  border-radius: calc(var(--tpl-radius) * 1cqmin);
+  box-shadow: 0 2.4cqmin 6cqmin -3.6cqmin #00040bb3, inset 0 1px 0 var(--glass-highlight), 0 0 40px -22px #2f8fff40;
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  backdrop-filter: blur(18px) saturate(170%);
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+.tpl-pin { position: absolute; inset: 0; display: grid; grid-template-columns: 13cqmin 1fr; border-radius: inherit; overflow: hidden; }
+.tpl-side {
+  background: rgba(var(--glass-tint), 0.04); border-right: 1px solid var(--ds-border);
+  display: flex; flex-direction: column; align-items: center;
+  padding-block: calc(var(--tpl-spacing) * 1cqmin); gap: 2.4cqmin;
+}
+.tpl-ico, .tpl-logo { width: 7.2cqmin; height: 7.2cqmin; border-radius: calc(var(--tpl-radius) * 0.6cqmin); display: grid; place-items: center; flex: none; }
+.tpl-logo { background: transparent; }
+.tpl-logo svg { width: 7cqmin; height: 7cqmin; overflow: visible; }
+.tpl-brandrow { display: flex; align-items: center; gap: 1.6cqmin; min-width: 0; }
+.tpl-brandrow .tpl-mark { width: 9.4cqmin; height: 9.4cqmin; flex: none; overflow: visible; }
+.tpl-ico { color: var(--ds-text-secondary); }
+.tpl-ico.on { background: color-mix(in srgb, var(--tpl-hl) 16%, transparent); color: var(--tpl-hl-ink); }
+.tpl-ico svg { width: 3.8cqmin; height: 3.8cqmin; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tpl-side .tpl-spacer { flex: 1; }
+.tpl-side .tpl-sep { width: 4cqmin; height: 1px; background: var(--ds-border); }
+.tpl-main { min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: calc(var(--tpl-spacing) * 1cqmin); gap: calc(var(--tpl-spacing) * 0.62cqmin); }
+.tpl-top { display: flex; align-items: center; justify-content: space-between; gap: 2cqmin; min-width: 0; }
+.tpl-wm { display: grid; gap: 0.3cqmin; min-width: 0; }
+.tpl-wm-name { font-size: 3cqmin; font-weight: 750; letter-spacing: -0.01em; line-height: 1.1; }
+.tpl-wm-name b { color: var(--tpl-hl-ink); font-weight: 750; }
+.tpl-wm-desc { font-size: 2cqmin; color: var(--ds-text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: 0.01em; }
+.tpl-chip {
+  flex: none; display: inline-flex; align-items: center; gap: 1cqmin;
+  font-size: 2.1cqmin; color: var(--ds-text-secondary); border: 1px solid var(--ds-border);
+  border-radius: 999px; padding: 0.8cqmin 1.8cqmin; background: rgba(var(--glass-tint), 0.07);
+}
+.tpl-chip svg { width: 2.6cqmin; height: 2.6cqmin; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
+.tpl-titles { display: grid; gap: 0.6cqmin; }
+.tpl-h { margin: 0; font-size: 5.2cqmin; font-weight: 680; letter-spacing: -0.02em; line-height: 1.1; color: var(--ds-text-primary); }
+.tpl-sub { margin: 0; font-size: 2.4cqmin; color: var(--ds-text-secondary); }
+.tpl-board { position: relative; flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--tpl-spacing) * 0.7cqmin); }
+.tpl-col {
+  min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 1.8cqmin;
+  background: rgba(var(--glass-tint), 0.035); border: 1px solid var(--ds-border);
+  border-radius: calc(var(--tpl-radius) * 0.7cqmin); padding: 2cqmin;
+}
+.tpl-col-h { display: flex; align-items: center; gap: 1.2cqmin; height: 4.2cqmin; font-size: 2.6cqmin; font-weight: 650; color: var(--ds-text-primary); }
+.tpl-col-h svg { width: 3.2cqmin; height: 3.2cqmin; fill: none; stroke: var(--ds-text-secondary); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.tpl-count {
+  margin-left: auto; font-size: 2.1cqmin; font-weight: 650; font-variant-numeric: tabular-nums;
+  padding: 0.5cqmin 1.4cqmin; border-radius: 999px; background: rgba(var(--glass-tint), 0.1); color: var(--ds-text-secondary);
+}
+.tpl-prog { margin-left: auto; display: flex; align-items: center; gap: 1.2cqmin; font-size: 2.1cqmin; font-weight: 600; color: var(--ds-text-secondary); font-variant-numeric: tabular-nums; }
+.tpl-bar { width: 8cqmin; height: 0.8cqmin; border-radius: 999px; background: var(--ds-border); overflow: hidden; }
+.tpl-bar i { display: block; height: 100%; width: 0; background: var(--tpl-hl); border-radius: inherit; }
+.tpl-col-b { position: relative; flex: 1; min-height: 0; }
+.tpl-slots { display: flex; flex-direction: column; gap: 1.6cqmin; }
+.tpl-slot { height: 15cqmin; border-radius: calc(var(--tpl-radius) * 0.55cqmin); flex: none; }
+.tpl-inbox .tpl-slot { visibility: hidden; }
+.tpl-today .tpl-slot { border: 1.5px dashed var(--ds-border-strong); }
+.tpl-msgs {
+  position: absolute; inset: 0; overflow: hidden; display: flex; flex-direction: column; gap: 1.4cqmin;
+  -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent);
+}
+.tpl-msg {
+  flex: none; height: 6.2cqmin; display: flex; align-items: center; gap: 1.4cqmin; padding: 0 1.6cqmin;
+  background: rgba(var(--glass-tint), 0.08); border: 1px solid var(--ds-border); border-radius: calc(var(--tpl-radius) * 0.5cqmin);
+}
+.tpl-msg .tpl-av { width: 3.4cqmin; height: 3.4cqmin; border-radius: 50%; background: var(--ds-border-strong); flex: none; }
+.tpl-msg .tpl-ln { flex: 1; display: grid; gap: 0.9cqmin; }
+.tpl-msg .tpl-ln i { display: block; height: 1cqmin; border-radius: 999px; background: var(--ds-border); }
+.tpl-msg .tpl-ln i:first-child { background: var(--ds-border-strong); }
+.tpl-clear { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 1cqmin; text-align: center; }
+.tpl-clear .tpl-ok { width: 7cqmin; height: 7cqmin; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--tpl-hl) 18%, transparent); }
+.tpl-clear .tpl-ok svg { width: 3.8cqmin; height: 3.8cqmin; fill: none; stroke: var(--tpl-hl); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.tpl-clear strong { font-size: 2.8cqmin; font-weight: 650; color: var(--ds-text-primary); }
+.tpl-clear span { font-size: 2.1cqmin; color: var(--ds-text-secondary); }
+.tpl-task {
+  position: absolute; left: 0; top: 0; z-index: 2;
+  display: flex; align-items: center; gap: 1.8cqmin; padding: 0 2cqmin;
+  background: linear-gradient(145deg, rgba(var(--glass-tint),0.16), rgba(var(--glass-tint),0.07));
+  border: 1px solid var(--glass-border);
+  border-radius: calc(var(--tpl-radius) * 0.55cqmin);
+  will-change: transform, opacity;
+}
+.tpl-ring { width: 6.2cqmin; height: 6.2cqmin; flex: none; overflow: visible; }
+.tpl-ring .tpl-trk { fill: none; stroke: var(--ds-border-strong); stroke-width: 2.2; }
+.tpl-ring .tpl-prg { fill: none; stroke: var(--tpl-hl); stroke-width: 2.4; stroke-linecap: round; }
+.tpl-ring .tpl-dot { fill: var(--tpl-hl); transform-box: fill-box; transform-origin: center; }
+.tpl-ring .tpl-chk { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.tpl-tx { min-width: 0; flex: 1; display: grid; gap: 0.6cqmin; }
+.tpl-tt { display: flex; align-items: center; justify-content: space-between; gap: 1.2cqmin; }
+.tpl-name { font-size: 3cqmin; font-weight: 680; letter-spacing: -0.01em; color: var(--ds-text-primary); }
+.tpl-pill { display: grid; flex: none; }
+.tpl-pill span {
+  grid-area: 1 / 1; text-align: center; white-space: nowrap;
+  font-size: 1.95cqmin; font-weight: 650; padding: 0.45cqmin 1.3cqmin; border-radius: 999px; border: 1px solid transparent;
+}
+.tpl-pill .tpl-s0 { background: rgba(var(--glass-tint), 0.12); color: var(--ds-text-secondary); }
+.tpl-pill .tpl-s1 { border-color: var(--tpl-hl); color: var(--tpl-hl-ink); background: rgba(var(--glass-tint), 0.1); }
+.tpl-pill .tpl-s2 { background: var(--tpl-hl); color: #1a0d02; }
+.tpl-det {
+  font-size: 2.2cqmin; line-height: 1.3; color: var(--ds-text-secondary);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }

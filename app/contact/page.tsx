@@ -4,6 +4,7 @@ import { Mail, MapPin, ShieldCheck, ExternalLink, MessageSquare, Video, ArrowRig
 import { siteConfig } from '@/content/site';
 import { AppShell } from '@/components/shell/AppShell';
 import { ContactLeadForm } from '@/components/forms/ContactLeadForm';
+import { Reveal } from '@/components/design-system/Reveal';
 
 const pageContent = getPageContent('/contact');
 export const metadata = getPageMetadata('/contact');
@@ -46,6 +47,7 @@ export default function ContactPage() {
         {/* Contact Info Strip */}
         <div className="contact-channels grid grid-cols-1 gap-4 text-xs text-[var(--navy-400)] dark:text-[#C7D4DB]">
           {/* WhatsApp Direct */}
+          <Reveal variant="scale">
           <div className="glass-card p-5 rounded-3xl space-y-3 shadow-md border-[#93D4D8]/30">
             <div className="flex items-center gap-2 font-bold text-[var(--navy-900)] dark:text-white text-sm">
               <MessageSquare className="h-5 w-5 text-[#93D4D8]" />
@@ -64,8 +66,10 @@ export default function ContactPage() {
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
+          </Reveal>
 
           {/* Email */}
+          <Reveal variant="scale" delay={0.06}>
           <div className="glass-card p-5 rounded-3xl space-y-3 shadow-md">
             <div className="flex items-center gap-2 font-bold text-[var(--navy-900)] dark:text-white text-sm">
               <Mail className="h-5 w-5 text-[var(--red-700)] dark:text-[var(--orange-500)]" />
@@ -78,8 +82,10 @@ export default function ContactPage() {
               Response within 24 hours
             </p>
           </div>
+          </Reveal>
 
           {/* WhatChimp Credential */}
+          <Reveal variant="scale" delay={0.12}>
           <div className="glass-card p-5 rounded-3xl space-y-3 shadow-md">
             <div className="flex items-center gap-2 font-bold text-[var(--navy-900)] dark:text-white text-sm">
               <ShieldCheck className="h-5 w-5 text-orange-500" />
@@ -98,6 +104,7 @@ export default function ContactPage() {
               <ExternalLink className="h-3 w-3" />
             </a>
           </div>
+          </Reveal>
         </div>
 
         {/* Lead Form */}
