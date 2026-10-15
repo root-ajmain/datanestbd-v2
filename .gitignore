@@ -1,6 +1,7 @@
 node_modules/
 .next/
 .next-static-export/
+.next-static-export-*/
 .next-seo-review/
 .next-redesign/
 artifacts/
