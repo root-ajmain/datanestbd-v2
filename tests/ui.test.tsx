@@ -104,23 +104,23 @@ test('server hydration restores saved preferences and responds to cross-tab chan
   container.innerHTML = renderToString(tree);
   let root!: ReturnType<typeof hydrateRoot>;
   await act(async () => { root = hydrateRoot(container, tree); });
-  assert.equal(screen.getByTestId('preferences').textContent, 'dark/light/true');
-  assert.equal(document.documentElement.dataset.theme, 'light');
+  assert.equal(screen.getByTestId('preferences').textContent, 'dark/dark/true');
+  assert.equal(document.documentElement.dataset.theme, 'dark');
   assert.ok(document.documentElement.classList.contains('reduced-motion'));
   await act(async () => {
     localStorage.setItem('datanest-theme', 'light');
     localStorage.setItem('datanest-reduced-motion', 'false');
     window.dispatchEvent(new Event('storage'));
   });
-  // The marketing palette stays light while motion preferences remain user-controlled.
-  assert.equal(screen.getByTestId('preferences').textContent, 'light/light/false');
+  // The marketing palette stays dark while motion preferences remain user-controlled.
+  assert.equal(screen.getByTestId('preferences').textContent, 'light/dark/false');
   assert.equal(document.documentElement.classList.contains('reduced-motion'), false);
   fireEvent.click(screen.getByRole('button', { name: 'Light' }));
   await act(async () => {
     localStorage.removeItem('datanest-theme');
     window.dispatchEvent(new Event('storage'));
   });
-  assert.equal(screen.getByTestId('preferences').textContent, 'system/light/false');
+  assert.equal(screen.getByTestId('preferences').textContent, 'system/dark/false');
   await act(async () => root.unmount()); container.remove();
 });
 

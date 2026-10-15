@@ -68,8 +68,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const systemDark = useSyncExternalStore(subscribe, getSystemDark, () => false);
   void theme;
   void systemDark;
-  // The redesigned marketing site has one deliberate light palette.
-  const resolvedTheme = 'light' as 'light' | 'dark';
+  // The redesigned marketing site has one deliberate dark palette. Keep the
+  // dark variant active because marketing pages use it for readable text and
+  // controls over the near-black canvas.
+  const resolvedTheme = 'dark' as const;
 
   useEffect(() => {
     const root = document.documentElement;
