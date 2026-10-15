@@ -9,7 +9,7 @@ const root = join(import.meta.dirname, '..');
 const apiDir = join(root, 'app', 'api');
 const apiDirBak = join(root, 'app', '_api.static-export-backup');
 const apiBaseUrl = process.argv[2] || 'https://api.datanestbd.com';
-const outDirName = '.next-static-export';
+const outDirName = process.env.STATIC_EXPORT_DIR || '.next-static-export';
 const outDir = join(root, outDirName);
 
 if (existsSync(apiDirBak)) {
