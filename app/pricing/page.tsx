@@ -6,6 +6,7 @@ import { Display } from '@/components/design-system/Heading';
 import { Badge } from '@/components/design-system/Badge';
 import { PricingGrid } from '@/components/design-system/PricingGrid';
 import { IncludedShowcase } from '@/components/design-system/IncludedShowcase';
+import { PlatformFeatureGrid } from '@/components/design-system/PlatformFeatureGrid';
 import { Reveal } from '@/components/design-system/Reveal';
 import { siteConfig } from '@/content/site';
 
@@ -60,6 +61,11 @@ export default function PricingPage() {
             </div>
           </div>
         </section>
+
+        {/* Platform Features */}
+        <Reveal>
+          <PlatformFeatureGrid />
+        </Reveal>
 
         {/* Pricing Grid */}
         <section>

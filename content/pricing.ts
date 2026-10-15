@@ -99,6 +99,49 @@ export const includedInEveryPlan: { title: string; description: string }[] = [
   },
 ];
 
+export interface PlatformFeature {
+  title: string;
+  description: string;
+}
+
+export interface PlatformFeatureGroup {
+  id: string;
+  title: string;
+  features: PlatformFeature[];
+}
+
+/** What the WhatsApp Official API platform can actually do, grouped by job. */
+export const platformFeatureGroups: PlatformFeatureGroup[] = [
+  {
+    id: 'messaging',
+    title: 'Messaging',
+    features: [
+      { title: 'Bulk WhatsApp Broadcast', description: 'Reach your whole list in one send.' },
+      { title: 'Click to WhatsApp Ads', description: 'Ads that open a WhatsApp conversation.' },
+      { title: 'Omnichannel Inbox', description: 'WhatsApp, Instagram and Facebook in one inbox.' },
+      { title: 'Shared Inbox', description: 'One inbox for the whole team.' },
+    ],
+  },
+  {
+    id: 'automation',
+    title: 'Automation',
+    features: [
+      { title: 'WhatsApp Chatbot', description: 'Automate replies around the clock.' },
+      { title: 'AI Agent', description: 'An AI agent that knows your business.' },
+      { title: 'Appointment Booking', description: 'Let customers book on WhatsApp.' },
+    ],
+  },
+  {
+    id: 'commerce',
+    title: 'Commerce',
+    features: [
+      { title: 'WhatsApp Catalog', description: 'Show your products inside WhatsApp.' },
+      { title: 'WhatsApp Payments', description: 'Take payments inside the chat.' },
+      { title: 'WhatsApp Forms', description: 'Collect answers with forms in the chat.' },
+    ],
+  },
+];
+
 export function getDiscountedMonthlyTk(monthlyPriceTk: number, discountPct: number): number {
   return Math.round(monthlyPriceTk * (1 - discountPct / 100));
 }
