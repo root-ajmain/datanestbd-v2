@@ -8,6 +8,7 @@ import { SplitButton } from '@/components/ui/SplitButton';
 import { LeadForm } from '@/components/forms/LeadForm';
 import { KineticServicesReel } from '@/components/design-system/KineticServicesReel';
 import { Reveal } from '@/components/design-system/Reveal';
+import { ServiceSignalMap } from '@/components/sections/ServiceSignalMap';
 
 const pageContent = getPageContent('/services');
 export const metadata = getPageMetadata('/services');
@@ -28,6 +29,8 @@ export default function ServicesPage() {
             {pageContent.introduction}
           </p>
         </section>
+
+        <ServiceSignalMap />
 
         {/* One word, four services, one message */}
         <section className="kinetic-reel-section glass-card overflow-hidden rounded-3xl p-2 sm:p-4">

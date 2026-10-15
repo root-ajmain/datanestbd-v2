@@ -47,6 +47,11 @@ export function GlobalNavbar() {
       >
         <Logo iconSize={32} />
 
+        <div className="nav-presence" aria-label="DataNest BD is available for new projects">
+          <span className="status-dot" aria-hidden="true" />
+          <span>ONLINE · DHAKA</span>
+        </div>
+
         {/* Desktop nav — mobile relies entirely on the bottom icon dock, no hamburger/menu here. */}
         <nav aria-label="Primary navigation" className="hidden items-center gap-1 xl:flex">
           <Link href="/" aria-current={pathname === '/' ? 'page' : undefined} className={navLinkClass}>
