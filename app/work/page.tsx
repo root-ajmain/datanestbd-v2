@@ -8,6 +8,7 @@ import { SplitButton } from '@/components/ui/SplitButton';
 import { AnimatedWorkflow } from '@/components/design-system/AnimatedWorkflow';
 import { projectWorkflows } from '@/lib/project-workflows';
 import { Reveal } from '@/components/design-system/Reveal';
+import { HostedSiteShowcase } from '@/components/sections/HostedSiteShowcase';
 
 const pageContent = getPageContent('/work');
 export const metadata = getPageMetadata('/work');
@@ -19,7 +20,7 @@ export default function WorkPage() {
         {/* Header */}
         <section className="space-y-4">
           <div className="text-xs font-bold uppercase tracking-wider text-[var(--red-700)] dark:text-[var(--orange-500)]">
-            Reference Work & System Architecture
+            Live sites & system architecture
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--navy-900)] dark:text-[var(--white)]">
             {pageContent.heading}
@@ -28,6 +29,18 @@ export default function WorkPage() {
             {pageContent.introduction}
           </p>
         </section>
+
+        <HostedSiteShowcase />
+
+        <Reveal>
+          <section className="work-architecture-heading" aria-labelledby="architecture-title">
+            <div>
+              <span className="eyebrow">From live builds to system thinking</span>
+              <h2 id="architecture-title">The systems behind the surface.</h2>
+            </div>
+            <p>Alongside the published sites, these reference architectures show how we think through workflows before implementation.</p>
+          </section>
+        </Reveal>
 
         {/* Project Cards */}
         <div className="space-y-8">
