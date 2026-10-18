@@ -30,14 +30,14 @@ export default function ServicesPage() {
           </p>
         </section>
 
-        <ServiceSignalMap />
-
         {/* One word, four services, one message */}
         <section className="kinetic-reel-section glass-card overflow-hidden rounded-3xl p-2 sm:p-4">
           <div style={{ aspectRatio: '16 / 9' }}>
             <KineticServicesReel className="h-full w-full" />
           </div>
         </section>
+
+        <ServiceSignalMap />
 
         {/* Grouped Services */}
         {serviceGroups.map((group) => {

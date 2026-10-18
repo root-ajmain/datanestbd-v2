@@ -37,6 +37,9 @@ export function ServiceSignalMap() {
 
           return (
             <article key={group.id} className={`service-map-card service-map-card-${index + 1}`}>
+              <span className="service-map-corner service-map-corner--tl" aria-hidden="true" />
+              <span className="service-map-corner service-map-corner--br" aria-hidden="true" />
+              <span className="service-map-scan" aria-hidden="true" />
               <div className="service-map-card-top">
                 <span className="service-map-index">0{index + 1} / {group.shortTitle}</span>
                 <span className="service-map-status">
@@ -45,6 +48,7 @@ export function ServiceSignalMap() {
               </div>
 
               <div className="service-map-icon" aria-hidden="true">
+                <span className="service-map-icon-ring" />
                 <Icon size={20} strokeWidth={1.7} />
               </div>
               <h3>{group.title}</h3>

@@ -8,6 +8,7 @@ export interface HostedSite {
   previewLabel: string;
   status: 'Custom domain';
   accent: 'blue' | 'orange' | 'mint' | 'violet';
+  screenshot: string;
 }
 
 /**
@@ -15,17 +16,6 @@ export interface HostedSite {
  * Temporary hostingersite.com preview addresses are intentionally excluded.
  */
 export const hostedSites: HostedSite[] = [
-  {
-    id: 'datanest-bd',
-    domain: 'datanestbd.com',
-    href: 'https://datanestbd.com',
-    name: 'DataNest BD',
-    category: 'Technology & automation',
-    description: 'The studio site connecting WhatsApp infrastructure, web engineering and AI workflows.',
-    previewLabel: 'Digital systems studio',
-    status: 'Custom domain',
-    accent: 'blue',
-  },
   {
     id: 'luminous-lifestyle',
     domain: 'luminouslifestylebd.com',
@@ -36,6 +26,7 @@ export const hostedSites: HostedSite[] = [
     previewLabel: 'Commerce experience',
     status: 'Custom domain',
     accent: 'orange',
+    screenshot: '/images/portfolio/luminous-lifestyle.jpg',
   },
   {
     id: 'omnikini',
@@ -47,6 +38,7 @@ export const hostedSites: HostedSite[] = [
     previewLabel: 'Fashion storefront',
     status: 'Custom domain',
     accent: 'violet',
+    screenshot: '/images/portfolio/omnikini.jpg',
   },
   {
     id: 'city-overseas',
@@ -58,6 +50,7 @@ export const hostedSites: HostedSite[] = [
     previewLabel: 'Business presence',
     status: 'Custom domain',
     accent: 'mint',
+    screenshot: '/images/portfolio/city-overseas.jpg',
   },
   {
     id: 'cvfelow',
@@ -69,6 +62,7 @@ export const hostedSites: HostedSite[] = [
     previewLabel: 'Career platform',
     status: 'Custom domain',
     accent: 'blue',
+    screenshot: '/images/portfolio/cvfelow.jpg',
   },
   {
     id: 'fabacs-texyarn',
@@ -80,6 +74,7 @@ export const hostedSites: HostedSite[] = [
     previewLabel: 'Industrial catalogue',
     status: 'Custom domain',
     accent: 'mint',
+    screenshot: '/images/portfolio/fabacs-texyarn.jpg',
   },
   {
     id: 'heaven-hotel',
@@ -91,5 +86,6 @@ export const hostedSites: HostedSite[] = [
     previewLabel: 'Booking experience',
     status: 'Custom domain',
     accent: 'orange',
+    screenshot: '/images/portfolio/heaven-hotel.jpg',
   },
 ];
