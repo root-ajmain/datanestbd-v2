@@ -24,6 +24,8 @@ import {
   Megaphone,
   Target,
   BarChart3,
+  Clapperboard,
+  Scissors,
 } from 'lucide-react';
 import { services } from '@/content/services';
 import { siteConfig } from '@/content/site';
@@ -90,6 +92,12 @@ const serviceWorkflows: Record<string, WorkflowStep[]> = {
     { label: 'Permission Setup', icon: stepIcon(ShieldCheck) },
     { label: 'Domain Verification', icon: stepIcon(Globe) },
     { label: 'Submission Ready', icon: stepIcon(CheckCircle2) },
+  ],
+  'marketing-motion-videos': [
+    { label: 'Brief & Script', icon: stepIcon(FileSearch) },
+    { label: 'Storyboard', icon: stepIcon(Clapperboard) },
+    { label: 'Edit & Motion Design', icon: stepIcon(Scissors) },
+    { label: 'Platform Export', icon: stepIcon(Megaphone) },
   ],
 };
 

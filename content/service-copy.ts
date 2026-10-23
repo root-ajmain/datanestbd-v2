@@ -51,6 +51,14 @@ export const serviceCopy: Record<string, {
       { question: 'How do you measure campaign performance?', answer: 'We agree on the relevant conversion and review qualified inquiries, acquisition costs and sales feedback alongside platform metrics. No fixed return on ad spend is promised without evidence and agreed measurement conditions.' },
     ],
   },
+  'marketing-motion-videos': {
+    summary: 'A motion video project starts with the platform it will run on and the single message it needs to carry. We script and storyboard around your offer, then edit using the footage, product photos or screen recordings you can provide. Pacing, captions and typography are built for sound-off viewing on social feeds and ad placements. Each video is exported in the aspect ratio and length your destination platform expects. Production covers the creative asset itself; running it as a paid campaign is scoped separately.',
+    faqs: [
+      { question: 'What is the difference between a motion video and a full ad campaign?', answer: 'A motion video is the creative asset: the script, edit and platform-ready export. Running it as a paid campaign with audience targeting, budget and tracking is a separate scope, covered under Data-Driven Facebook & Google Ads.' },
+      { question: 'Can you use our existing product photos or footage?', answer: 'Yes. We can edit from footage, photos or screen recordings you already have. If new footage needs to be filmed on location, that is scoped and quoted separately.' },
+      { question: 'How long does a typical video take to produce?', answer: 'Turnaround depends on script complexity, how much raw material you can provide upfront and the number of revision rounds. We confirm a timeline once we review the brief.' },
+    ],
+  },
   'meta-ecosystem': {
     summary: 'A setup review identifies which business owns each Page, ad account, domain and WhatsApp asset, and who has permission to manage it. We help organize access, review domain configuration and identify mismatches in business details before a verification submission. The authorized business representative completes the required steps through Meta. Business verification, domain verification and subscription-based verification badges are different processes; completing one does not guarantee the others. Our work is configuration and readiness assistance, with approval decisions retained by the platform.',
     faqs: [
