@@ -29,7 +29,7 @@ function TypedPromise({ reduceMotion }: { reduceMotion: boolean }) {
     }, 65);
     return () => window.clearInterval(timer);
   }, [reduceMotion, text.length]);
-  return <span className="typed-promise"><span className="sr-only">{text}</span><span aria-hidden="true">{reduceMotion ? text : text.slice(0, length)}<i /></span></span>;
+  return <span className="typed-promise"><span className="sr-only">{text}</span><span aria-hidden="true">{reduceMotion ? text : text.slice(0, length)}</span></span>;
 }
 
 function Workspace({ stage = 2 }: { stage?: number }) {
@@ -63,7 +63,7 @@ export function GrowthExperience() {
         <div className="hero-actions"><Link href="/contact" className="premium-button">Let’s build your next chapter <ArrowUpRight size={18} /></Link><a href="#your-story" className="story-link">See how we get there <ArrowDown size={16} /></a></div>
         <div className="hero-signoff"><span className="tiny-line" /><TypedPromise reduceMotion={reduceMotion} /></div>
       </div>
-      <div className="hero-art"><div className="hero-art-glow" /><motion.div className="hero-3d" style={reduceMotion ? {} : { rotateX, rotateY, y }}><div className="brand-motion"><BrandLogoMotion className="h-full w-full" /></div></motion.div><div className="art-caption"><span>THE DATANEST BD MARK</span><span>Brand &amp; services intro</span></div></div>
+      <div className="hero-art"><div className="hero-art-glow" /><motion.div className="hero-3d" style={reduceMotion ? {} : { rotateX, rotateY, y }}><div className="brand-motion"><BrandLogoMotion className="h-full w-full" /></div></motion.div></div>
       <div className="hero-bottom"><a href="#your-story"><Mouse size={17} /> Scroll to see your next chapter</a><button type="button" onClick={() => setReduceMotion(!reduceMotion)} aria-pressed={reduceMotion}>{reduceMotion ? 'Motion off' : 'Motion on'}<span className={`motion-switch ${reduceMotion ? '' : 'is-on'}`} /></button></div>
     </section>
     <div className="capability-strip"><span>Thoughtfully connected.</span><strong>WhatsApp Business API</strong><span className="strip-plus">+</span><strong>Web & software</strong><span className="strip-plus">+</span><strong>AI & automation</strong><a href={siteConfig.partner.credentialUrl} target="_blank" rel="noopener noreferrer">WhatChimp partner <ArrowUpRight size={14} /></a></div>

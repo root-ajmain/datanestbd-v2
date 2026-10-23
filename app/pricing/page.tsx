@@ -9,6 +9,8 @@ import { IncludedShowcase } from '@/components/design-system/IncludedShowcase';
 import { PlatformFeatureGrid } from '@/components/design-system/PlatformFeatureGrid';
 import { Reveal } from '@/components/design-system/Reveal';
 import { siteConfig } from '@/content/site';
+import { WhatsAppLink } from '@/components/analytics/WhatsAppLink';
+import { TrackViewContent } from '@/components/analytics/TrackViewContent';
 
 const pageContent = getPageContent('/pricing');
 export const metadata = getPageMetadata('/pricing');
@@ -16,6 +18,7 @@ export const metadata = getPageMetadata('/pricing');
 export default function PricingPage() {
   return (
     <AppShell>
+      <TrackViewContent contentName="WhatsApp API pricing" />
       <div className="ds-root space-y-14 py-6">
         {/* Header */}
         <section className="space-y-5 text-center">
@@ -91,7 +94,8 @@ export default function PricingPage() {
             Pick any plan above, or talk to us first — our partner team replies on WhatsApp directly.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <a
+            <WhatsAppLink
+              location="pricing-banner"
               href={`${siteConfig.contact.whatsappUrl}?text=${encodeURIComponent('Hello DataNest BD, I am ready to onboard for the WhatsApp Official API.')}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -100,7 +104,7 @@ export default function PricingPage() {
               <MessageSquare className="h-4 w-4" />
               <span>Connect on WhatsApp Now</span>
               <ArrowRight className="h-4 w-4" />
-            </a>
+            </WhatsAppLink>
           </div>
         </section>
       </div>

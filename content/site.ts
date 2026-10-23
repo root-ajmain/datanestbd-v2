@@ -1,3 +1,5 @@
+import { WHATSAPP_NUMBER, WHATSAPP_URL, EMAIL, PHONE_DISPLAY, SOCIAL } from '@/lib/site';
+
 export interface SiteConfig {
   name: string;
   legalName: string;
@@ -13,6 +15,7 @@ export interface SiteConfig {
     email: string;
     whatsappNumber: string;
     whatsappUrl: string;
+    phoneDisplay: string;
     supportNote: string;
     meetingPlatforms: string[];
   };
@@ -42,9 +45,10 @@ export const siteConfig: SiteConfig = {
     timezone: 'Asia/Dhaka',
   },
   contact: {
-    email: 'info@datanestbd.com',
-    whatsappNumber: '+8801886123456',
-    whatsappUrl: 'https://wa.me/8801886123456',
+    email: EMAIL,
+    whatsappNumber: WHATSAPP_NUMBER,
+    whatsappUrl: WHATSAPP_URL,
+    phoneDisplay: PHONE_DISPLAY,
     supportNote: 'No physical office visits. 100% online consultancy via Google Meet & Zoom.',
     meetingPlatforms: ['Google Meet', 'Zoom'],
   },
@@ -54,8 +58,5 @@ export const siteConfig: SiteConfig = {
     since: 'March 2026',
     credentialUrl: 'https://partner.whatchimp.com/credential/datanest-bd/',
   },
-  social: {
-    linkedin: 'https://linkedin.com/company/datanest-bd',
-    facebook: 'https://facebook.com/datanestbd',
-  },
+  social: SOCIAL,
 };

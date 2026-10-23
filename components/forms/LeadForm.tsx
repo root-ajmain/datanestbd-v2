@@ -4,7 +4,9 @@ import React, { useEffect, useId, useRef, useState } from 'react';
 import { CheckCircle2, AlertCircle, Loader2, MessageSquare, ArrowRight, Video } from 'lucide-react';
 import { services } from '@/content/services';
 import { siteConfig } from '@/content/site';
+import { pricingTiers } from '@/content/pricing';
 import { leadSubmissionSchema } from '@/lib/leads/schema';
+import { newEventId, trackLead, trackWhatsAppClick } from '@/lib/analytics';
 
 interface LeadFormProps {
   initialServiceId?: string;
@@ -41,7 +43,7 @@ export function LeadForm({
   const headingRef = useRef<HTMLHeadingElement>(null);
   const pendingRef = useRef(false);
   const requestRef = useRef<AbortController | null>(null);
-  const submissionRef = useRef<{ key: string; fingerprint: string } | null>(null);
+  const submissionRef = useRef<{ key: string; fingerprint: string; pixelEventId: string } | null>(null);
   const [name, setName] = useState('');
   const [contactValue, setContactValue] = useState('');
   const [serviceId, setServiceId] = useState(normalizeService(initialServiceId));
@@ -89,9 +91,14 @@ export function LeadForm({
     };
     const fingerprint = JSON.stringify(details);
     if (!submissionRef.current || submissionRef.current.fingerprint !== fingerprint) {
-      submissionRef.current = { key: newSubmissionKey(), fingerprint };
+      submissionRef.current = { key: newSubmissionKey(), fingerprint, pixelEventId: newEventId() };
     }
-    const validated = leadSubmissionSchema.safeParse({ ...details, idempotencyKey: submissionRef.current.key });
+    const submission = submissionRef.current;
+    const validated = leadSubmissionSchema.safeParse({
+      ...details,
+      idempotencyKey: submission.key,
+      pixelEventId: submission.pixelEventId,
+    });
     if (!validated.success) {
       setFieldErrors(validated.error.flatten().fieldErrors);
       setErrorSummary('Please check the highlighted fields and try again.');
@@ -123,6 +130,8 @@ export function LeadForm({
         return;
       }
       saved = true;
+      const planPrice = pricingTiers.find((tier) => tier.id === validated.data.planId)?.monthlyPriceTk;
+      trackLead({ contentName: serviceTitle, value: planPrice, eventId: submission.pixelEventId });
       setSubmittedWhatsAppUrl(whatsappUrl);
     } catch {
       if (!controller.signal.aborted || requestRef.current === controller) {
@@ -152,7 +161,7 @@ export function LeadForm({
       <h2 ref={headingRef} tabIndex={-1} className="text-2xl font-bold">Your inquiry has been saved</h2>
       <p className="text-base text-[var(--color-text-secondary)]">Continue in WhatsApp to send your prepared message. You can review it there before sending.</p>
       <div className="flex flex-wrap gap-3">
-        <a href={submittedWhatsAppUrl} target="_blank" rel="noopener noreferrer" className="glass-btn glass-btn-accent min-h-12 px-5 text-base">
+        <a href={submittedWhatsAppUrl} onClick={() => trackWhatsAppClick('lead-form-success')} target="_blank" rel="noopener noreferrer" className="glass-btn glass-btn-accent min-h-12 px-5 text-base">
           <MessageSquare className="h-5 w-5 shrink-0" aria-hidden="true" />Continue in WhatsApp<span className="sr-only"> (opens a new tab)</span>
         </a>
         <button type="button" onClick={startAnother} className="glass-btn min-h-12 px-5 text-sm">Submit another inquiry</button>
@@ -165,7 +174,7 @@ export function LeadForm({
       <div className="space-y-3">
         <h2 className="text-2xl sm:text-3xl font-bold">{title}</h2>
         <p className="text-base leading-relaxed text-[var(--color-text-secondary)]">{subtitle}</p>
-        <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[var(--color-link)] underline underline-offset-4">
+        <a href={siteConfig.contact.whatsappUrl} onClick={() => trackWhatsAppClick('lead-form-skip')} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[var(--color-link)] underline underline-offset-4">
           Prefer to skip the form? Chat on WhatsApp<ArrowRight className="h-4 w-4" aria-hidden="true" /><span className="sr-only"> (opens a new tab)</span>
         </a>
       </div>
@@ -175,7 +184,7 @@ export function LeadForm({
       {errorSummary && (
         <div role="alert" className="rounded-xl border border-red-300 bg-red-50 p-4 text-sm text-red-800 dark:border-red-800 dark:bg-red-950 dark:text-red-200">
           <p className="flex items-start gap-2"><AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />{errorSummary}</p>
-          {fallbackUrl && <a className="mt-3 inline-flex min-h-11 items-center font-semibold underline" href={fallbackUrl} target="_blank" rel="noopener noreferrer">Continue directly in WhatsApp<span className="sr-only"> (opens a new tab)</span></a>}
+          {fallbackUrl && <a className="mt-3 inline-flex min-h-11 items-center font-semibold underline" href={fallbackUrl} onClick={() => trackWhatsAppClick('lead-form-fallback')} target="_blank" rel="noopener noreferrer">Continue directly in WhatsApp<span className="sr-only"> (opens a new tab)</span></a>}
         </div>
       )}
       <form ref={formRef} onSubmit={handleSubmit} noValidate aria-busy={isSubmitting} className="space-y-5">

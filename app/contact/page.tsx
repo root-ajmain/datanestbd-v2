@@ -1,16 +1,17 @@
 import { getPageContent, getPageMetadata } from '@/lib/page-metadata';
 import React, { Suspense } from 'react';
-import { Mail, MapPin, ShieldCheck, ExternalLink, MessageSquare, Video, ArrowRight } from 'lucide-react';
+import { Mail, MapPin, ShieldCheck, ExternalLink, MessageSquare, Video, ArrowRight, Phone } from 'lucide-react';
 import { siteConfig } from '@/content/site';
 import { AppShell } from '@/components/shell/AppShell';
 import { ContactLeadForm } from '@/components/forms/ContactLeadForm';
 import { Reveal } from '@/components/design-system/Reveal';
+import { WhatsAppLink } from '@/components/analytics/WhatsAppLink';
 
 const pageContent = getPageContent('/contact');
 export const metadata = getPageMetadata('/contact');
 
 export default function ContactPage() {
-  const directWhatsAppUrl = `https://wa.me/8801886123456?text=${encodeURIComponent(
+  const directWhatsAppUrl = `${siteConfig.contact.whatsappUrl}?text=${encodeURIComponent(
     'Hello DataNest BD, I would like to schedule an online consultation via Google Meet or Zoom.'
   )}`;
 
@@ -54,9 +55,10 @@ export default function ContactPage() {
               <span>Direct WhatsApp</span>
             </div>
             <p className="text-sm font-extrabold text-[var(--navy-900)] dark:text-white">
-              +880 1886-123456
+              {siteConfig.contact.phoneDisplay}
             </p>
-            <a
+            <WhatsAppLink
+              location="contact-direct"
               href={directWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -64,6 +66,13 @@ export default function ContactPage() {
             >
               <span>Chat on WhatsApp</span>
               <ArrowRight className="h-3.5 w-3.5" />
+            </WhatsAppLink>
+            <a
+              href={`tel:${siteConfig.contact.whatsappNumber}`}
+              className="inline-flex min-h-11 items-center gap-1.5 text-xs font-semibold text-[var(--color-link)] underline underline-offset-4"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              <span>Call {siteConfig.contact.phoneDisplay}</span>
             </a>
           </div>
           </Reveal>

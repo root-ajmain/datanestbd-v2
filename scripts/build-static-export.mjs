@@ -59,11 +59,13 @@ function writeStaticHtaccess(path, apiOrigin) {
 
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'",
+    "script-src 'self' 'unsafe-inline' https://connect.facebook.net https://static.cloudflareinsights.com",
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: https://agency-api.whatchimp.com",
+    "img-src 'self' data: https://agency-api.whatchimp.com https://www.facebook.com",
     "font-src 'self' data:",
-    `connect-src 'self' ${apiOrigin}`,
+    `connect-src 'self' ${apiOrigin} https://www.facebook.com https://connect.facebook.net https://cloudflareinsights.com`,
+    "media-src 'self'",
+    "frame-src 'self' https://www.facebook.com",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",

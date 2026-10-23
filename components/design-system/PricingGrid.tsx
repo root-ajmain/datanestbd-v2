@@ -12,6 +12,7 @@ import {
   type PricingTier,
 } from '@/content/pricing';
 import { siteConfig } from '@/content/site';
+import { trackWhatsAppClick } from '@/lib/analytics';
 
 function waHref(tier: PricingTier, cycleLabel: string, monthlyTk: number) {
   const text = encodeURIComponent(
@@ -125,6 +126,7 @@ export function PricingGrid() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick(`pricing-${tier.id}`)}
                 variant={tier.highlighted ? 'primary' : 'secondary'}
                 className="mt-6 w-full"
               >

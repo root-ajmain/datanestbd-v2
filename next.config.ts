@@ -63,10 +63,10 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 
 async function headers() {
-    // No third-party scripts, styles, analytics, or iframes are loaded
-    // anywhere on the site — the only external resource is the WhatChimp
-    // partner badge image — so the CSP can stay tight instead of carrying
-    // broad allowances "just in case". 'unsafe-eval' is only added outside
+    // Meta Pixel (components/analytics/MetaPixel.tsx) needs its script host,
+    // a pixel tracking beacon to www.facebook.com, and (for the eventual
+    // Facebook iframe-based features) a frame-src allowance. Everything else
+    // stays as tight as before. 'unsafe-eval' is only added outside
     // production: Next dev mode's webpack React Refresh runtime evaluates
     // code as a string for fast HMR, which a strict script-src blocks
     // outright (confirmed: it silently kills all client-side JS in dev,
@@ -75,11 +75,13 @@ async function headers() {
     const isDev = process.env.NODE_ENV !== 'production';
     const csp = [
       "default-src 'self'",
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
+      `script-src 'self' 'unsafe-inline' https://connect.facebook.net https://static.cloudflareinsights.com${isDev ? " 'unsafe-eval'" : ''}`,
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: https://agency-api.whatchimp.com",
+      "img-src 'self' data: https://agency-api.whatchimp.com https://www.facebook.com",
       "font-src 'self' data:",
-      "connect-src 'self' https://api.datanestbd.com",
+      "connect-src 'self' https://api.datanestbd.com https://www.facebook.com https://connect.facebook.net https://cloudflareinsights.com",
+      "media-src 'self'",
+      "frame-src 'self' https://www.facebook.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
