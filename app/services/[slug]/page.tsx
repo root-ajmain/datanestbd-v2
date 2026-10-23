@@ -37,6 +37,7 @@ import { IncludedShowcase } from '@/components/design-system/IncludedShowcase';
 import { AnimatedWorkflow, type WorkflowStep } from '@/components/design-system/AnimatedWorkflow';
 import { ThreePrioritiesLoop } from '@/components/design-system/ThreePrioritiesLoop';
 import { Reveal } from '@/components/design-system/Reveal';
+import { SectionVideo } from '@/components/media/SectionVideo';
 import type { LucideIcon } from 'lucide-react';
 
 // Pages here are Server Components; only plain data or already-rendered
@@ -191,6 +192,21 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <AnimatedWorkflow headline={`How ${service.title} moves end to end`} steps={serviceWorkflows[service.id]} />
           )
         )}
+        </Reveal>
+
+        {/* Why choose us — decorative motion recap of points already stated
+            as real text in the hero summary above and the deliverables /
+            included-with-every-plan sections below. */}
+        <Reveal>
+        <section className="glass-card overflow-hidden rounded-3xl p-2 sm:p-4">
+          <SectionVideo
+            id={`why-choose-${service.id}`}
+            width={1200}
+            height={900}
+            label={`Why choose DataNest BD for ${service.title}`}
+            className="rounded-2xl"
+          />
+        </section>
         </Reveal>
 
         {/* Overview Summary */}
