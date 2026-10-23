@@ -8,6 +8,7 @@ import { SplitButton } from '@/components/ui/SplitButton';
 import { WhatChimpProofBadge } from '@/components/ui/BrandBadges';
 import { AnimatedWorkflow } from '@/components/design-system/AnimatedWorkflow';
 import { Reveal } from '@/components/design-system/Reveal';
+import { WhatsAppLink } from '@/components/analytics/WhatsAppLink';
 
 const pageContent = getPageContent('/about');
 export const metadata = getPageMetadata('/about');
@@ -136,7 +137,7 @@ export default function AboutPage() {
                   <Mail className="h-4 w-4 text-[var(--red-700)] dark:text-[var(--orange-500)]" />
                   <span>WhatsApp & Email</span>
                 </div>
-                <p>+880 1886-123456</p>
+                <p>{siteConfig.contact.phoneDisplay}</p>
                 <a href={`mailto:${siteConfig.contact.email}`} className="hover:underline font-medium text-[var(--red-700)] dark:text-[var(--orange-500)]">
                   {siteConfig.contact.email}
                 </a>
@@ -147,14 +148,15 @@ export default function AboutPage() {
 
         <Reveal>
           <section className="text-center pt-4">
-            <a
-              href="https://wa.me/8801886123456?text=Hello%20DataNest%20BD%2C%20I%20would%20like%20to%20consult%20with%20you%20via%20Google%20Meet%2FZoom."
+            <WhatsAppLink
+              location="about-cta"
+              href={`${siteConfig.contact.whatsappUrl}?text=${encodeURIComponent('Hello DataNest BD, I would like to consult with you via Google Meet/Zoom.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="glass-btn glass-btn-accent text-sm py-3 px-6 rounded-2xl inline-flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95"
             >
               <span>Connect on WhatsApp</span>
-            </a>
+            </WhatsAppLink>
           </section>
         </Reveal>
       </div>

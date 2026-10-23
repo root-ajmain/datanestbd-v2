@@ -3,7 +3,7 @@ import './globals.css';
 import './premium.css';
 import { ThemeProvider } from '@/components/shell/ThemeProvider';
 import { ScrollProgress } from '@/components/shell/ScrollProgress';
-import { LoadingScreen } from '@/components/shell/LoadingScreen';
+import { MetaPixel } from '@/components/analytics/MetaPixel';
 import { siteConfig } from '@/content/site';
 import { getOrganizationJsonLd, getWebsiteJsonLd, jsonLdString } from '@/lib/seo';
 import { fontVariables } from '@/lib/fonts';
@@ -58,8 +58,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main-content" className="skip-to-content sr-only focus:not-sr-only">
           Skip to main content
         </a>
+        <MetaPixel />
         <ThemeProvider>
-          <LoadingScreen />
           <ScrollProgress />
           {children}
         </ThemeProvider>

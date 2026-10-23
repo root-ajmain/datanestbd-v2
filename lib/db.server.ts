@@ -49,8 +49,10 @@ async function ensurePgTables(pool: Pool) {
         utm_source VARCHAR(128),
         utm_medium VARCHAR(128),
         utm_campaign VARCHAR(128),
+        pixel_event_id VARCHAR(64),
         processing_status VARCHAR(32) NOT NULL DEFAULT 'received'
       );
+      ALTER TABLE leads ADD COLUMN IF NOT EXISTS pixel_event_id VARCHAR(64);
 
       CREATE INDEX IF NOT EXISTS idx_leads_submission_key ON leads(submission_key);
     `);
@@ -132,6 +134,7 @@ function rowToLead(row: Record<string, unknown>): LeadRecord {
     utmSource: (row.utm_source as string) || undefined,
     utmMedium: (row.utm_medium as string) || undefined,
     utmCampaign: (row.utm_campaign as string) || undefined,
+    pixelEventId: (row.pixel_event_id as string) || undefined,
     processingStatus: row.processing_status as LeadRecord['processingStatus'],
   };
 }
@@ -181,8 +184,8 @@ export const db = {
             `INSERT INTO leads (
               id, submission_key, created_at, updated_at, name, contact_method, contact_value,
               service_id, plan_id, context, inquiry_acknowledged, marketing_opt_in,
-              source_page, utm_source, utm_medium, utm_campaign, processing_status
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)`,
+              source_page, utm_source, utm_medium, utm_campaign, pixel_event_id, processing_status
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)`,
             [
               lead.id,
               lead.submissionKey,
@@ -200,6 +203,7 @@ export const db = {
               lead.utmSource || null,
               lead.utmMedium || null,
               lead.utmCampaign || null,
+              lead.pixelEventId || null,
               lead.processingStatus,
             ]
           );

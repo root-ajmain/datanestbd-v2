@@ -119,6 +119,7 @@ export async function POST(req: NextRequest) {
       utmSource: data.utmSource,
       utmMedium: data.utmMedium,
       utmCampaign: data.utmCampaign,
+      pixelEventId: data.pixelEventId,
       processingStatus: 'received',
     };
 
