@@ -39,6 +39,7 @@
     "node_modules",
     "codex",
     "_removed_codex_do_not_need",
-    ".removed_backup"
+    ".removed_backup",
+    "video"
   ]
 }
