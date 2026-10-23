@@ -7,6 +7,7 @@ import { MetaPixel } from '@/components/analytics/MetaPixel';
 import { siteConfig } from '@/content/site';
 import { getOrganizationJsonLd, getWebsiteJsonLd, jsonLdString } from '@/lib/seo';
 import { fontVariables } from '@/lib/fonts';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.canonicalOrigin),
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollProgress />
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
