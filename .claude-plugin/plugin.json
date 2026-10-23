@@ -1,4 +1,8 @@
 {
   "name": "datanestbd-v2",
-  "description": "DataNest BD website — Next.js marketing site, pricing/services content, lead API, and the Remotion video pipeline under video/."
+  "description": "DataNest BD website — Next.js marketing site, pricing/services content, lead API, and the Remotion video pipeline under video/.",
+  "version": "1.0.0",
+  "author": { "name": "DataNest BD" },
+  "license": "LicenseRef-Proprietary",
+  "icon": ".claude-plugin/icon.png"
 }
