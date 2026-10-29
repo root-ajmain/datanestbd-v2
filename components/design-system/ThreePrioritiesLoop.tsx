@@ -24,7 +24,7 @@ const LOGO = {
 };
 
 const BRAND_NAME = 'DataNest BD';
-const DESCRIPTOR = 'Meta Official WhatsApp Business API Provider';
+const DESCRIPTOR = 'WhatChimp implementation partner';
 const HEADING = 'Today’s priorities';
 const SUBLINE = '248 unread chats, sorted into three clear tasks.';
 const INBOX_LABEL = 'Inbox';

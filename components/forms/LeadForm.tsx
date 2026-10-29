@@ -48,6 +48,9 @@ export function LeadForm({
   const [contactValue, setContactValue] = useState('');
   const [serviceId, setServiceId] = useState(normalizeService(initialServiceId));
   const [meetingPref, setMeetingPref] = useState('google-meet');
+  const [industry, setIndustry] = useState('');
+  const [monthlyMessageVolume, setMonthlyMessageVolume] = useState('');
+  const [preferredContactMethod, setPreferredContactMethod] = useState('whatsapp');
   const [context, setContext] = useState('');
   const [inquiryAcknowledged, setInquiryAcknowledged] = useState(false);
   const [honeypot, setHoneypot] = useState('');
@@ -82,11 +85,20 @@ export function LeadForm({
     setFieldErrors({});
     setFallbackUrl(null);
     const meetingName = meetingPref === 'zoom' ? 'Zoom' : 'Google Meet';
+    const isWhatsAppService = serviceId === 'whatsapp-api' || whatsappPlanIds.includes(serviceId);
+    const qualificationContext = isWhatsAppService
+      ? [
+          industry && `Industry: ${industry}`,
+          monthlyMessageVolume && `Estimated monthly message volume: ${monthlyMessageVolume}`,
+          `Preferred follow-up: ${preferredContactMethod === 'video' ? meetingName : preferredContactMethod === 'email' ? 'Email' : 'WhatsApp'}`,
+        ].filter(Boolean).join('\n')
+      : '';
+    const combinedContext = [context.trim(), qualificationContext].filter(Boolean).join('\n');
     const details = {
       name, contactMethod: 'whatsapp' as const, contactValue, serviceId,
       planId: whatsappPlanIds.includes(serviceId)
         ? serviceId : serviceId === normalizeService(initialServiceId) ? initialPlanId : undefined,
-      context: `${context} [Preferred Meeting: ${meetingName}]`,
+      context: `${combinedContext} [Preferred Meeting: ${meetingName}]`.trim().slice(0, 1900),
       inquiryAcknowledged, marketingOptIn: false, sourcePage: window.location.pathname,
     };
     const fingerprint = JSON.stringify(details);
@@ -105,7 +117,7 @@ export function LeadForm({
       return;
     }
     const serviceTitle = serviceOptions.find((option) => option.id === serviceId)?.title || serviceId;
-    const text = `Inquiry to DataNest BD\nName: ${name.trim()}\nService: ${serviceTitle}\nWhatsApp: ${contactValue.trim()}\nMeeting: ${meetingName}\nDetails: ${context.trim() || 'General consultation'}`;
+    const text = `Inquiry to DataNest BD\nName: ${name.trim()}\nService: ${serviceTitle}\nWhatsApp: ${contactValue.trim()}\nMeeting: ${meetingName}\nDetails: ${details.context || 'General consultation'}`;
     const whatsappUrl = `${siteConfig.contact.whatsappUrl}?text=${encodeURIComponent(text)}`;
     pendingRef.current = true;
     setIsSubmitting(true);
@@ -149,7 +161,7 @@ export function LeadForm({
 
   const startAnother = () => {
     submissionRef.current = null;
-    setName(''); setContactValue(''); setContext(''); setInquiryAcknowledged(false);
+    setName(''); setContactValue(''); setIndustry(''); setMonthlyMessageVolume(''); setPreferredContactMethod('whatsapp'); setContext(''); setInquiryAcknowledged(false);
     setServiceId(normalizeService(initialServiceId)); setMeetingPref('google-meet');
     setErrorSummary(null); setFieldErrors({}); setFallbackUrl(null); setSubmittedWhatsAppUrl(null);
     requestAnimationFrame(() => formRef.current?.querySelector<HTMLInputElement>('input[name="name"]')?.focus());
@@ -219,9 +231,52 @@ export function LeadForm({
               </div>
             </fieldset>
           </div>
+          {(serviceId === 'whatsapp-api' || whatsappPlanIds.includes(serviceId)) && (
+            <div className="space-y-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]/45 p-4 sm:p-5">
+              <div>
+                <h3 className="text-sm font-bold text-[var(--color-text-headings)]">Help us prepare the right WhatsApp setup</h3>
+                <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Optional details help us route your consultation without adding extra steps later.</p>
+              </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="min-w-0 space-y-2">
+                  <label htmlFor={`${id}-industry`} className={labelClass}>Your industry <span className="font-normal text-[var(--color-text-secondary)]">(optional)</span></label>
+                  <select id={`${id}-industry`} name="industry" value={industry} onChange={(e) => setIndustry(e.target.value)} className={inputClass}>
+                    <option value="">Select an industry</option>
+                    <option>E-commerce</option>
+                    <option>Travel or recruitment</option>
+                    <option>Education</option>
+                    <option>Healthcare</option>
+                    <option>Professional services</option>
+                    <option>Local service business</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div className="min-w-0 space-y-2">
+                  <label htmlFor={`${id}-volume`} className={labelClass}>Estimated monthly message volume <span className="font-normal text-[var(--color-text-secondary)]">(optional)</span></label>
+                  <select id={`${id}-volume`} name="monthlyMessageVolume" value={monthlyMessageVolume} onChange={(e) => setMonthlyMessageVolume(e.target.value)} className={inputClass}>
+                    <option value="">Select a range</option>
+                    <option>Under 1,000</option>
+                    <option>1,000–10,000</option>
+                    <option>10,000–50,000</option>
+                    <option>50,000+</option>
+                  </select>
+                </div>
+              </div>
+              <fieldset className="space-y-2">
+                <legend className={labelClass}>Preferred follow-up <span className="font-normal text-[var(--color-text-secondary)]">(optional)</span></legend>
+                <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  {[['whatsapp', 'WhatsApp'], ['email', 'Email'], ['video', 'Google Meet or Zoom']].map(([value, label]) => (
+                    <label key={value} className="flex min-h-12 items-center gap-2 rounded-xl border border-[var(--color-border)] px-3 text-sm">
+                      <input type="radio" name={`${id}-preferred-contact`} value={value} checked={preferredContactMethod === value} onChange={() => setPreferredContactMethod(value)} className="h-4 w-4 accent-[var(--red-700)]" />{label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            </div>
+          )}
           <div className="space-y-2">
-            <label htmlFor={`${id}-context`} className={labelClass}>Project details <span className="font-normal text-[var(--color-text-secondary)]">(optional)</span></label>
-            <textarea id={`${id}-context`} name="context" rows={4} maxLength={1900} value={context} onChange={(e) => setContext(e.target.value)} placeholder="Tell us about your goals, team size, or existing tools." className={`${inputClass} resize-y`} {...errorProps('context')} />
+            <label htmlFor={`${id}-context`} className={labelClass}>{serviceId === 'whatsapp-api' || whatsappPlanIds.includes(serviceId) ? 'Primary challenge or project details' : 'Project details'} <span className="font-normal text-[var(--color-text-secondary)]">(optional)</span></label>
+            <textarea id={`${id}-context`} name="context" rows={4} maxLength={1900} value={context} onChange={(e) => setContext(e.target.value)} placeholder={serviceId === 'whatsapp-api' || whatsappPlanIds.includes(serviceId) ? 'What would you like WhatsApp to help your team handle?' : 'Tell us about your goals, team size, or existing tools.'} className={`${inputClass} resize-y`} {...errorProps('context')} />
             {fieldError('context')}
           </div>
           <div>

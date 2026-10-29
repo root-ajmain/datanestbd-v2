@@ -47,8 +47,8 @@ export const services: ServiceItem[] = [
       'DataNest assists with verification readiness; Meta makes final account verification decisions.',
     ],
     faqs: serviceCopy['whatsapp-api'].faqs,
-    ctaIntent: 'demo',
-    ctaText: 'Request WhatsApp Demo',
+    ctaIntent: 'consultation',
+    ctaText: 'Request a WhatsApp Consultation',
     highlightImage: '/images/datanest_whatsapp_flowgent_1791075386142.jpg',
   },
   {
