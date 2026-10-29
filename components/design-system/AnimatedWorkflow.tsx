@@ -42,12 +42,12 @@ export function AnimatedWorkflow({ headline, steps, className = '' }: AnimatedWo
         {headline}
       </p>
 
-      <div className="relative mt-8 flex items-center justify-between gap-1 sm:mt-10">
+      <div className="workflow-steps relative mt-8 grid grid-cols-2 gap-x-4 gap-y-7 sm:mt-10 sm:flex sm:items-center sm:justify-between sm:gap-1">
         {steps.map((step, idx) => {
           const isLast = idx === steps.length - 1;
           return (
             <React.Fragment key={step.label}>
-              <div className="flex flex-col items-center gap-2 text-center">
+              <div className="workflow-step flex min-w-0 flex-col items-center gap-2 text-center">
                 <motion.span
                   animate={{
                     boxShadow: [
@@ -72,7 +72,7 @@ export function AnimatedWorkflow({ headline, steps, className = '' }: AnimatedWo
               </div>
 
               {!isLast && (
-                <div className="relative mb-6 h-px flex-1 overflow-hidden bg-[var(--ds-border)]">
+                <div className="workflow-connector relative mb-6 hidden h-px flex-1 overflow-hidden bg-[var(--ds-border)] sm:block">
                   <motion.span
                     animate={{ x: ['-100%', '220%'] }}
                     transition={{

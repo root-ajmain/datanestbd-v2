@@ -18,7 +18,7 @@ export default function RefundPolicyPage() {
           </h1>
           <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{pageContent.introduction}</p>
           <p className="text-xs text-[var(--color-text-secondary)]">
-            Last Updated: October 4, 2026 · DataNest BD Ltd.
+            Last Updated: October 4, 2026 · DataNest BD
           </p>
         </div>
 

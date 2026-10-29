@@ -34,7 +34,7 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   name: 'DataNest BD',
-  legalName: 'DataNest BD Ltd.',
+  legalName: 'DataNest BD',
   tagline: 'Build. Automate. Grow 10X Faster.',
   descriptor:
     'Dhaka-based technology & automation agency specializing in Official WhatsApp Business API, conversion-focused web engineering, full-stack SaaS, and custom AI workflows.',

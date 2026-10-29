@@ -7,7 +7,7 @@ Audit date: 2026-10-29. Contact details below are current repository/live eviden
 | Field | Current evidence | Source locations | Status |
 |---|---|---|---|
 | Public name | DataNest BD / DataNest.BD | `lib/site.ts`, live homepage | Consistent |
-| Legal name | DataNest BD Ltd. | `content/site.ts`, footer, live pages | Owner confirmation required |
+| Public business name | DataNest BD | `content/site.ts`, footer, live pages | Owner confirmed during implementation |
 | Email | info@datanestbd.com | `lib/site.ts`, footer, policy/contact pages | Consistent in current evidence |
 | Phone/WhatsApp | +880 1804-277420 / `wa.me/8801804277420` | `lib/site.ts`, live homepage/about/pricing | Consistent in current evidence |
 | Location | Dhaka, Bangladesh | `content/site.ts`, live pages | Consistent |
@@ -51,4 +51,3 @@ Audit date: 2026-10-29. Contact details below are current repository/live eviden
 - FlowGent appears in historical README content but is not presented as an active DataNest BD product in the current live homepage; keep it separate as instructed.
 - Pricing and platform features require owner/provider confirmation before being expanded or reframed.
 - Keep the current WhatChimp credential URL as the canonical verification link.
-

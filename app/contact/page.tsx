@@ -1,16 +1,23 @@
 import { getPageContent, getPageMetadata } from '@/lib/page-metadata';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Mail, MapPin, ShieldCheck, ExternalLink, MessageSquare, Video, ArrowRight, Phone } from 'lucide-react';
 import { siteConfig } from '@/content/site';
 import { AppShell } from '@/components/shell/AppShell';
-import { ContactLeadForm } from '@/components/forms/ContactLeadForm';
+import { LeadForm } from '@/components/forms/LeadForm';
 import { Reveal } from '@/components/design-system/Reveal';
 import { WhatsAppLink } from '@/components/analytics/WhatsAppLink';
 
 const pageContent = getPageContent('/contact');
 export const metadata = getPageMetadata('/contact');
 
-export default function ContactPage() {
+interface ContactPageProps {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const params = await searchParams;
+  const service = typeof params.service === 'string' ? params.service : undefined;
+  const plan = typeof params.plan === 'string' ? params.plan : undefined;
   const directWhatsAppUrl = `${siteConfig.contact.whatsappUrl}?text=${encodeURIComponent(
     'Hello DataNest BD, I would like to schedule an online consultation via Google Meet or Zoom.'
   )}`;
@@ -118,9 +125,12 @@ export default function ContactPage() {
 
         {/* Lead Form */}
         <section className="contact-form">
-          <Suspense fallback={null}>
-            <ContactLeadForm />
-          </Suspense>
+          <LeadForm
+            initialServiceId={service || 'whatsapp-starter'}
+            initialPlanId={plan}
+            title="Submit an inquiry"
+            subtitle="Save your inquiry below, then continue in WhatsApp to review and send your prepared message."
+          />
         </section>
       </div>
     </AppShell>

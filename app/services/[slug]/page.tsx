@@ -146,9 +146,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         dangerouslySetInnerHTML={{ __html: jsonLdString(breadcrumbJsonLd) }}
       />
 
-      <div className="space-y-12">
+      <div className="service-detail space-y-12">
         {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[var(--navy-400)] dark:text-[#C7D4DB]">
+        <nav aria-label="Breadcrumb" className="service-breadcrumb flex items-center gap-2 text-xs text-[var(--navy-400)] dark:text-[#C7D4DB]">
           <Link href="/services" className="hover:text-[var(--navy-900)] dark:hover:text-[var(--white)] inline-flex items-center gap-1">
             <ArrowLeft className="h-3 w-3" />
             <span>All Services</span>
@@ -158,7 +158,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </nav>
 
         {/* Hero Header */}
-        <section className="space-y-4">
+        <section className="service-hero space-y-4">
           <span className="text-xs font-mono font-bold text-[var(--red-700)] dark:text-[var(--orange-500)] uppercase tracking-wider">
             {service.groupLabel}
           </span>
@@ -169,11 +169,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             {pageContent.introduction}
           </p>
 
-          <div className="pt-2 flex flex-wrap items-center gap-4">
+          <div className="service-hero-actions pt-2 flex flex-wrap items-center gap-4">
             <SplitButton href={`#inquiry`} variant="primary">
               {service.ctaText}
             </SplitButton>
-            <SplitButton href="/contact" variant="outline">
+            <SplitButton href={`/contact?service=${service.id}&intent=${service.ctaIntent}`} variant="outline">
               Request Custom Scope
             </SplitButton>
           </div>
@@ -320,7 +320,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
         {/* What's included with every DataNest BD engagement — the WhatsApp API
             page already covers this in full on /pricing, so it's skipped here. */}
-        {service.id !== 'whatsapp-api' && <IncludedShowcase />}
+        {service.id === 'whatsapp-api' && <IncludedShowcase />}
 
         {/* Contextual Lead Form */}
         <section id="inquiry" className="pt-6">

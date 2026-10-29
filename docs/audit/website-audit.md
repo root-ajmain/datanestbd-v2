@@ -11,7 +11,7 @@ The current site is a polished Next.js App Router marketing site with a clear Dh
 Highest-impact findings:
 
 1. **High — Lead durability is deployment-dependent.** `lib/db.server.ts` warns that production without `DATABASE_URL` falls back to a local JSON store that is not durable on most serverless hosts. Production storage, notifications, and API origin must be verified independently.
-2. **High — Contact identity requires owner confirmation.** Current source/live evidence consistently shows `info@datanestbd.com`, `+880 1804-277420`, Dhaka, online consultations, Sunday–Thursday GMT+6. The legal name `DataNest BD Ltd.` and “Silver Partner since March 2026” are source claims, while credential-page content could not be rendered by the crawler; confirm business records before expanding identity claims.
+2. **High — Contact identity requires owner confirmation.** Current source/live evidence consistently shows `info@datanestbd.com`, `+880 1804-277420`, Dhaka, online consultations, Sunday–Thursday GMT+6. The public business name is `DataNest BD`; confirm the exact registered identity before expanding legal claims.
 3. **High — The brief’s required seven-service taxonomy differs from the current eight service records.** The current site includes Marketing Motion Videos and Meta Ecosystem Setup in addition to the six core groups; the target information architecture must be approved before content or routes change.
 4. **High — WhatsApp pricing and feature claims are commercially sensitive.** Live pricing is explicit and Meta charges are stated separately, but WhatChimp/provider configuration and current Meta pricing were not verified from account access. Preserve disclaimers and obtain owner/provider confirmation before promoting “official provider”, payments, AI agent, broadcast, or plan-inclusion claims.
 5. **Medium — Technical SEO is substantially implemented but needs a rendered production crawl.** Source includes metadata, canonicals, JSON-LD, sitemap, robots, redirects and security headers. Several live URL fetches returned crawler cache misses, so status, headers, schema and broken-link coverage remain incomplete until a browser/HTTP crawl is run.
@@ -42,4 +42,3 @@ Highest-impact findings:
 ## Phase 1 decision
 
 Do not implement the redesign until the owner confirms: (a) service taxonomy, (b) legal/contact identity, (c) current WhatChimp plan/feature boundaries, (d) production lead storage/API deployment, and (e) which current routes must remain primary for SEO equity.
-

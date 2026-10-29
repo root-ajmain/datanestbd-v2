@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 
 interface SectionVideoProps {
   /** Matches the rendered file names: /videos/<id>.mp4, .webm and .jpg */
@@ -19,15 +19,16 @@ interface SectionVideoProps {
  */
 export function SectionVideo({ id, width, height, label, className }: SectionVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReduceMotion(query.matches);
-    const onChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
-    query.addEventListener('change', onChange);
-    return () => query.removeEventListener('change', onChange);
-  }, []);
+  const reduceMotion = useSyncExternalStore(
+    (onStoreChange) => {
+      const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const onChange = () => onStoreChange();
+      query.addEventListener('change', onChange);
+      return () => query.removeEventListener('change', onChange);
+    },
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () => false,
+  );
 
   useEffect(() => {
     const el = ref.current;

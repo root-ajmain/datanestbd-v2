@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
           </h1>
           <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{pageContent.introduction}</p>
           <p className="text-xs text-[var(--color-text-secondary)]">
-            Last Updated: October 4, 2026 · DataNest BD Ltd., Dhaka, Bangladesh
+            Last Updated: October 4, 2026 · DataNest BD, Dhaka, Bangladesh
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-2">
             <h2 className="text-base font-bold text-[var(--color-text-primary)]">3. Storage & Durable Security</h2>
             <p>
-              Lead inquiries are securely validated and stored in encrypted databases with strict access controls. We do not sell, rent, or trade your contact information with unauthorized third parties.
+              Lead inquiries are validated before processing and retained only for consultation follow-up, service delivery, and related operational records. Access is restricted to authorized DataNest BD personnel. We do not sell, rent, or trade your contact information with unauthorized third parties.
             </p>
           </section>
 
